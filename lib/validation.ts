@@ -33,3 +33,26 @@ export const reservationRecordSchema = z.object({
   industry: z.string().optional(),
   goal: z.string().optional()
 });
+
+export const notifyPayloadSchema = z
+  .object({
+    type: z.enum(["diagnosis", "reservation", "member", "test"]).optional(),
+    title: z.string().min(1).optional(),
+    message: z.string().min(1).optional(),
+    data: z
+      .object({
+        name: z.string().optional(),
+        email: z.string().optional(),
+        industry: z.string().optional(),
+        goal: z.string().optional(),
+        preferredDateTime: z.string().optional(),
+        consultation: z.string().optional(),
+        lineDisplayName: z.string().optional(),
+        lineUserId: z.string().optional(),
+        sourceDemoLabel: z.string().optional(),
+        sourceDemoType: z.string().optional()
+      })
+      .passthrough()
+      .optional()
+  })
+  .passthrough();

@@ -1,25 +1,26 @@
 import { NextResponse } from "next/server";
+import { z } from "zod";
+import { notifyPayloadSchema } from "@/lib/validation";
 
-type NotifyPayload = {
-  type?: "diagnosis" | "reservation" | "member" | "test";
-  title?: string;
-  message?: string;
-  data?: {
-    name?: string;
-    email?: string;
-    industry?: string;
-    goal?: string;
-    preferredDateTime?: string;
-    consultation?: string;
-    lineDisplayName?: string;
-    lineUserId?: string;
-    sourceDemoLabel?: string;
-    sourceDemoType?: string;
-  };
-};
+type NotifyPayload = z.infer<typeof notifyPayloadSchema>;
 
 export async function POST(request: Request) {
-  const payload = (await request.json().catch(() => ({}))) as NotifyPayload;
+  const rawPayload = await request.json().catch(() => ({}));
+  const parsedPayload = notifyPayloadSchema.safeParse(rawPayload);
+
+  if (!parsedPayload.success) {
+    console.log("[notify validation failed]", parsedPayload.error.flatten());
+    return NextResponse.json(
+      {
+        ok: false,
+        mode: "validation-error",
+        error: "通知payloadの形式が不正です。"
+      },
+      { status: 400 }
+    );
+  }
+
+  const payload = parsedPayload.data;
   const webhookUrl = process.env.SLACK_WEBHOOK_URL;
   const title =
     payload.title ??

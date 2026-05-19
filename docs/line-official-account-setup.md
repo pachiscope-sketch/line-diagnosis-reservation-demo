@@ -36,6 +36,8 @@ NEXT_PUBLIC_USE_MOCK=true
 
 公開後、診断トップ、業種別デモ、会員証、管理画面がブラウザで動くことを確認します。
 
+`/line-links` を開くと、リッチメニューやLIFF Endpoint URLに設定する候補URLを一覧で確認できます。
+
 ## 4. LIFFアプリを作成する
 
 1. LINE Developersで対象Providerを開く
@@ -60,6 +62,14 @@ https://your-project.vercel.app/demo/beauty
 https://your-project.vercel.app/demo/school
 https://your-project.vercel.app/member-card
 ```
+
+スタッフ向け来店処理画面は以下です。
+
+```text
+https://your-project.vercel.app/staff
+```
+
+`/staff` はQR会員証を読み取った後のポイント付与や来店処理を見せるスタッフ専用URLです。実案件では、一般ユーザー向けリッチメニューに直接出すのは非推奨です。店舗スタッフ用のブックマーク、管理画面内リンク、またはスタッフ専用ログイン後の導線として共有します。
 
 ## 5. Vercel環境変数にLIFF IDを設定する
 
@@ -100,6 +110,8 @@ LINE Official Account Managerでリッチメニューを作成し、各領域の
 
 テスト用には `/line-links` ページでVercel Endpoint URLを一覧確認できます。
 
+`/staff` はスタッフ専用の来店処理画面です。リッチメニューに直接置くと一般ユーザーも開けてしまうため、本番では認証を付けたスタッフ専用URLとして共有してください。
+
 ## 7. QRコードで友だち追加してテストする
 
 1. LINE Official Account Managerで友だち追加QRコードを表示
@@ -109,7 +121,8 @@ LINE Official Account Managerでリッチメニューを作成し、各領域の
 5. リッチメニューの「診断する」をタップ
 6. LINE内ブラウザでLIFFアプリが起動することを確認
 7. 診断、予約、会員証を操作する
-8. 管理画面で回答、予約、会員情報を確認する
+8. `/staff` でスタッフ向け来店処理の流れを確認する
+9. 管理画面で回答、予約、会員情報を確認する
 
 ## 8. 実案件での注意点
 

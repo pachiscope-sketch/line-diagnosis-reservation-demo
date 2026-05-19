@@ -4,34 +4,44 @@ LINE公式アカウント構築、LIFFアプリ開発、診断フォーム、予
 
 LIFF ID、Supabase、Slackが未設定でもモックモードで動くため、Vercelにデプロイしてすぐ営業デモとして使えます。
 
-## VercelデモURL
+## デモURL
 
-```text
-https://your-project.vercel.app
-```
+デプロイ後、`https://your-project.vercel.app` を実際のVercel URLに差し替えてください。
 
-デプロイ後、この欄を実際のURLに差し替えてください。
-
-## すぐ確認できるデモリンク
-
-- [店舗向けデモ](https://your-project.vercel.app/demo/store): 来店予約、クーポン、QR会員証、ポイントカード
-- [美容室向けデモ](https://your-project.vercel.app/demo/beauty): 髪のお悩み診断、メニュー提案、予約、再来店
-- [スクール向けデモ](https://your-project.vercel.app/demo/school): 講座診断、無料相談予約、資料請求、見込み客管理
-- [管理画面](https://your-project.vercel.app/admin): 診断回答、予約、会員、CSV出力、連携状態
-- [QR会員証](https://your-project.vercel.app/member-card): ユーザー向け会員証、ポイント、来店回数
-- [スタッフ来店処理](https://your-project.vercel.app/staff): QR読み取り後のポイント付与モック
-- [LINE導線説明](https://your-project.vercel.app/line-flow): リッチメニューからLIFFへ遷移する図解
-- [リッチメニュー用リンク一覧](https://your-project.vercel.app/line-links): LINE公式アカウントに設定するURL確認
+| 画面 | URL | 見せられる内容 |
+| --- | --- | --- |
+| 診断トップ | `https://your-project.vercel.app` | LINE登録後の診断、結果表示、予約導線 |
+| 店舗向けデモ | `https://your-project.vercel.app/demo/store` | 来店予約、クーポン、QR会員証、ポイントカード |
+| 美容室向けデモ | `https://your-project.vercel.app/demo/beauty` | 髪のお悩み診断、メニュー提案、予約、再来店 |
+| スクール向けデモ | `https://your-project.vercel.app/demo/school` | 講座診断、無料相談予約、資料請求、見込み客管理 |
+| 会員証 | `https://your-project.vercel.app/member-card` | ユーザー向けQR会員証、ポイント、来店回数 |
+| スタッフ画面 | `https://your-project.vercel.app/staff` | QR読み取り後のポイント付与、来店処理 |
+| 管理画面 | `https://your-project.vercel.app/admin` | 診断回答、予約、会員、CSV出力、連携状態 |
+| LINEリンク一覧 | `https://your-project.vercel.app/line-links` | LINE公式アカウントに設定するURL一覧 |
+| LINE導線説明 | `https://your-project.vercel.app/line-flow` | リッチメニューからLIFFへ遷移する図解 |
 
 ## スクリーンショット
 
-| 診断トップ | 管理画面 |
-| --- | --- |
-| ![診断トップ](docs/images/top.svg) | ![管理画面](docs/images/admin.svg) |
+実際の画面キャプチャはPNGで以下に配置する想定です。まだPNGがない場合は、`docs/images/*.svg` のプレースホルダーを参考に撮影してください。
 
-| QR会員証 | LINE導線説明 |
-| --- | --- |
-| ![QR会員証](docs/images/member-card.svg) | ![LINE導線説明](docs/images/line-flow.svg) |
+| 診断トップ | 診断結果 | QR会員証 |
+| --- | --- | --- |
+| ![診断トップ](docs/images/top.png) | ![診断結果](docs/images/result.png) | ![QR会員証](docs/images/member-card.png) |
+
+| スタッフ画面 | 管理画面 | LINE導線説明 |
+| --- | --- | --- |
+| ![スタッフ画面](docs/images/staff.png) | ![管理画面](docs/images/admin.png) | ![LINE導線説明](docs/images/line-flow.png) |
+
+配置予定ファイル:
+
+```text
+docs/images/top.png
+docs/images/result.png
+docs/images/member-card.png
+docs/images/staff.png
+docs/images/admin.png
+docs/images/line-flow.png
+```
 
 ## このデモで応募しやすい案件
 
@@ -355,7 +365,7 @@ LINE公式アカウントからLIFFとして開く詳しい手順は [docs/line-
 - 公開デモでは「ポートフォリオ用デモです。実際の個人情報は入力しないでください。」という注意文を表示しています。
 - 管理画面は本番案件では必ず認証を付け、閲覧権限を分けてください。
 
-## スクリーンショット
+## スクリーンショット配置場所
 
 GitHub掲載用の画像は `docs/images/` に配置してください。
 
@@ -363,6 +373,7 @@ GitHub掲載用の画像は `docs/images/` に配置してください。
 docs/images/top.png
 docs/images/result.png
 docs/images/member-card.png
+docs/images/staff.png
 docs/images/admin.png
 docs/images/line-flow.png
 ```

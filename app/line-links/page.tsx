@@ -32,6 +32,11 @@ const linkItems = [
     purpose: "QR会員証、ポイント、来店回数を見せるURL。"
   },
   {
+    label: "スタッフ来店処理",
+    path: "/staff",
+    purpose: "QR会員証を読み取った後のポイント付与・来店処理を見せるURL。"
+  },
+  {
     label: "LINE導線説明",
     path: "/line-flow",
     purpose: "友だち追加からLIFF、予約、通知までの流れを説明するURL。"
