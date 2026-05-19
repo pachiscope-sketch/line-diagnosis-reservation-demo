@@ -76,6 +76,10 @@ export function StaffCheckinDemo() {
             会員証へ戻る
           </Link>
 
+          <div className="demo-warning" role="note">
+            スタッフ専用デモ画面です。本番では認証を付け、一般ユーザー向けリッチメニューには表示しません。
+          </div>
+
           <article className="card result-card">
             <span className="section-icon">
               <ScanLine size={20} />

@@ -157,6 +157,7 @@ export function AdminDashboard() {
 
           <div className="demo-warning" role="note">
             ポートフォリオ用デモです。実際の個人情報は入力しないでください。
+            管理画面は営業デモ用です。本番では認証と閲覧権限の設定が必須です。
           </div>
 
           <div className="status-strip">

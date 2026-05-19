@@ -162,8 +162,10 @@ URL:
 このデモは、実店舗運用を説明しやすいように3つの画面に分けています。
 
 - ユーザー画面: `/member-card` でLINE会員証、ポイント、来店回数を表示
-- スタッフ画面: `/staff` でQR読み取り後の来店処理とポイント付与を想定
-- 管理画面: `/admin` で診断回答、予約、会員情報、CSV出力、連携状態を確認
+- スタッフ画面: `/staff` でQR読み取り後の来店処理とポイント付与を想定。本番ではスタッフ認証が必須
+- 管理画面: `/admin` で診断回答、予約、会員情報、CSV出力、連携状態を確認。本番では管理者認証が必須
+
+認証方針は [docs/admin-auth-plan.md](docs/admin-auth-plan.md) を参照してください。
 
 ## LIFF連携
 
@@ -207,6 +209,8 @@ Vercelへデプロイした後、LINE DevelopersでLIFFアプリを作成する�
 管理画面 `/admin` はユーザー向けのLINE画面ではなく、営業デモや運用担当者向けに共有するURLです。本番案件では認証を付けて、一般ユーザーには見せない構成にします。
 
 詳細手順は [docs/line-official-account-setup.md](docs/line-official-account-setup.md) を参照してください。
+
+LINE公式アカウントから実際にLIFFとして開く前の確認項目は [docs/line-production-checklist.md](docs/line-production-checklist.md) にまとめています。
 
 ## Supabase保存
 
@@ -270,7 +274,9 @@ RLSについて:
 
 詳細は [docs/line-richmenu-flow.md](docs/line-richmenu-flow.md) を参照してください。
 
-リッチメニューに設定するURLは `/line-links` で一覧確認できます。6分割リッチメニューの文言、リンク先、デザイン方針は [docs/rich-menu-design.md](docs/rich-menu-design.md) にまとめています。
+リッチメニューに設定するURLは `/line-links` で一覧確認できます。`/line-links` では、LINE Developersに設定するEndpoint URLと、LINE公式アカウントのリッチメニューに設定するLIFF URLの違いも確認できます。
+
+6分割リッチメニューの文言、リンク先、デザイン方針は [docs/rich-menu-design.md](docs/rich-menu-design.md) にまとめています。
 
 ## ローカル起動手順
 
@@ -341,7 +347,7 @@ NEXT_PUBLIC_USE_MOCK=true
 
 詳細は [docs/deployment-vercel.md](docs/deployment-vercel.md) を参照してください。
 
-LINE公式アカウントからLIFFとして開く詳しい手順は [docs/line-official-account-setup.md](docs/line-official-account-setup.md) を参照してください。管理画面の保護方針は [docs/admin-auth-plan.md](docs/admin-auth-plan.md) にまとめています。
+LINE公式アカウントからLIFFとして開く詳しい手順は [docs/line-official-account-setup.md](docs/line-official-account-setup.md) を参照してください。接続前の点検は [docs/line-production-checklist.md](docs/line-production-checklist.md)、管理画面とスタッフ画面の保護方針は [docs/admin-auth-plan.md](docs/admin-auth-plan.md) にまとめています。
 
 ## 実案件で拡張できること
 
@@ -366,6 +372,7 @@ LINE公式アカウントからLIFFとして開く詳しい手順は [docs/line-
 - Messaging APIを使う場合は、LINE Developers側のWebhook設定も別途必要です。
 - 公開デモでは「ポートフォリオ用デモです。実際の個人情報は入力しないでください。」という注意文を表示しています。
 - 管理画面は本番案件では必ず認証を付け、閲覧権限を分けてください。
+- スタッフ画面は本番案件ではスタッフ専用認証を付け、一般ユーザー向けリッチメニューには出さないでください。
 
 ## スクリーンショット配置場所
 

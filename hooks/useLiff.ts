@@ -44,12 +44,12 @@ function getLiffModeLabel(status: LiffUser["liffStatus"], error?: string) {
   }
 
   if (status === "connected") {
-    return "LINE連携中：実際のLINEプロフィールを使用しています";
+    return "LINEログイン済み：実際のLINEプロフィールを使用しています";
   }
 
   if (status === "loginRequired") {
-    return "LIFF設定済み：LINEログイン前のためプレビュー表示です";
+    return "LIFF設定済み：まだLINEログインしていません。ボタンからログインできます";
   }
 
-  return "LIFF未設定：モックユーザーとして表示しています";
+  return "LIFF未設定：ポートフォリオ用のデモユーザーで表示しています";
 }

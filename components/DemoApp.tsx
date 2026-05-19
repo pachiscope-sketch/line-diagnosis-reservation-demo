@@ -310,6 +310,8 @@ function TopScreen({
 }) {
   return (
     <section className="content-stack top-screen">
+      <DemoWarning />
+
       <div className="hero-visual" aria-hidden="true">
         <div className="chat-bubble left">{pattern.catchCopy}</div>
         <div className="chat-bubble right">予約・通知・会員化まで自動化</div>
@@ -328,8 +330,6 @@ function TopScreen({
           <p>{landingDescription}</p>
         </article>
       )}
-
-      <DemoWarning />
 
       <article className="hero-copy">
         <span className="pill">
@@ -684,13 +684,13 @@ function DemoWarning() {
 function getLiffStateLabel(status: LiffUser["liffStatus"]) {
   switch (status) {
     case "connected":
-      return "LIFFログイン済み";
+      return "LINEログイン済み";
     case "loginRequired":
       return "LIFF設定済み・未ログイン";
     case "error":
       return "LIFFエラー・モック表示";
     default:
-      return "LIFF未設定・モック";
+      return "LIFF未設定・デモ表示";
   }
 }
 
