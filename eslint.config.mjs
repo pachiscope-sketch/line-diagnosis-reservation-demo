@@ -14,6 +14,9 @@ const eslintConfig = [
     ignores: [
       ".codex-tools/**",
       ".next/**",
+      ".open-next/**",
+      ".wrangler/**",
+      "cloudflare-env.d.ts",
       "node_modules/**",
       "out/**",
       "next-env.d.ts"
