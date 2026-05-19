@@ -346,7 +346,7 @@ NEXT_PUBLIC_APP_URL=https://your-site.netlify.app
 NEXT_PUBLIC_USE_MOCK=true
 ```
 
-詳細は [docs/deployment-netlify.md](docs/deployment-netlify.md) を参照してください。Vercelを使う場合の旧手順は [docs/deployment-vercel.md](docs/deployment-vercel.md) に残しています。
+詳細は [docs/deployment-netlify.md](docs/deployment-netlify.md) を参照してください。Netlifyの無料クレジットが使えない場合は、Cloudflare Workers用の [docs/deployment-cloudflare.md](docs/deployment-cloudflare.md) も用意しています。Vercelを使う場合の旧手順は [docs/deployment-vercel.md](docs/deployment-vercel.md) に残しています。
 
 LINE公式アカウントからLIFFとして開く詳しい手順は [docs/line-official-account-setup.md](docs/line-official-account-setup.md) を参照してください。接続前の点検は [docs/line-production-checklist.md](docs/line-production-checklist.md)、管理画面とスタッフ画面の保護方針は [docs/admin-auth-plan.md](docs/admin-auth-plan.md) にまとめています。
 

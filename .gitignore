@@ -3,8 +3,10 @@ node_modules/
 
 # next.js
 .next/
+.open-next/
 out/
 tsconfig.tsbuildinfo
+cloudflare-env.d.ts
 
 # production
 build/
