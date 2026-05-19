@@ -2,25 +2,25 @@
 
 LINE公式アカウント構築、LIFFアプリ開発、診断フォーム、予約導線、Slack通知、Supabase保存、QR会員証をまとめて見せるポートフォリオ用デモです。
 
-LIFF ID、Supabase、Slackが未設定でもモックモードで動くため、Netlifyなどにデプロイしてすぐ営業デモとして使えます。
+LIFF ID、Supabase、Slackが未設定でもモックモードで動くため、Cloudflare Workers、Netlifyなどにデプロイしてすぐ営業デモとして使えます。
 
 ## デモURL
 
-デプロイ後、`https://your-site.netlify.app` を実際のNetlify公開URLに差し替えてください。`NEXT_PUBLIC_APP_URL` にも同じURLを設定すると、会員証QRやLINEリンク一覧の基準URLとして使えます。
+今回の公開デモURLは `https://line-diagnosis-reservation-demo.pachiscope.workers.dev` です。別環境へデプロイする場合は、このURLを実際の公開URLに差し替えてください。`NEXT_PUBLIC_APP_URL` にも同じURLを設定すると、会員証QRやLINEリンク一覧の基準URLとして使えます。
 
 実URLへ差し替えたREADMEは、そのままGitHubポートフォリオ、Upwork、クラウドワークス、営業DM、提案文の添付資料として使えます。
 
 | 画面 | URL | 見せられる内容 |
 | --- | --- | --- |
-| 診断トップ | `https://your-site.netlify.app` | LINE登録後の診断、結果表示、予約導線 |
-| 店舗向けデモ | `https://your-site.netlify.app/demo/store` | 来店予約、クーポン、QR会員証、ポイントカード |
-| 美容室向けデモ | `https://your-site.netlify.app/demo/beauty` | 髪のお悩み診断、メニュー提案、予約、再来店 |
-| スクール向けデモ | `https://your-site.netlify.app/demo/school` | 講座診断、無料相談予約、資料請求、見込み客管理 |
-| 会員証 | `https://your-site.netlify.app/member-card` | ユーザー向けQR会員証、ポイント、来店回数 |
-| スタッフ画面 | `https://your-site.netlify.app/staff` | QR読み取り後のポイント付与、来店処理 |
-| 管理画面 | `https://your-site.netlify.app/admin` | 診断回答、予約、会員、CSV出力、連携状態 |
-| LINEリンク一覧 | `https://your-site.netlify.app/line-links` | LINE公式アカウントに設定するURL一覧 |
-| LINE導線説明 | `https://your-site.netlify.app/line-flow` | リッチメニューからLIFFへ遷移する図解 |
+| 診断トップ | `https://line-diagnosis-reservation-demo.pachiscope.workers.dev` | LINE登録後の診断、結果表示、予約導線 |
+| 店舗向けデモ | `https://line-diagnosis-reservation-demo.pachiscope.workers.dev/demo/store` | 来店予約、クーポン、QR会員証、ポイントカード |
+| 美容室向けデモ | `https://line-diagnosis-reservation-demo.pachiscope.workers.dev/demo/beauty` | 髪のお悩み診断、メニュー提案、予約、再来店 |
+| スクール向けデモ | `https://line-diagnosis-reservation-demo.pachiscope.workers.dev/demo/school` | 講座診断、無料相談予約、資料請求、見込み客管理 |
+| 会員証 | `https://line-diagnosis-reservation-demo.pachiscope.workers.dev/member-card` | ユーザー向けQR会員証、ポイント、来店回数 |
+| スタッフ画面 | `https://line-diagnosis-reservation-demo.pachiscope.workers.dev/staff` | QR読み取り後のポイント付与、来店処理 |
+| 管理画面 | `https://line-diagnosis-reservation-demo.pachiscope.workers.dev/admin` | 診断回答、予約、会員、CSV出力、連携状態 |
+| LINEリンク一覧 | `https://line-diagnosis-reservation-demo.pachiscope.workers.dev/line-links` | LINE公式アカウントに設定するURL一覧 |
+| LINE導線説明 | `https://line-diagnosis-reservation-demo.pachiscope.workers.dev/line-flow` | リッチメニューからLIFFへ遷移する図解 |
 
 ## スクリーンショット
 
@@ -54,7 +54,7 @@ docs/images/line-flow.png
 - 美容室・サロンの予約率改善
 - スクール・講座販売の無料相談予約導線
 - Slack通知、Supabase保存、管理画面付きの業務改善
-- Netlifyデプロイ込みの小規模Webアプリ構築
+- Cloudflare Workers / Netlifyデプロイ込みの小規模Webアプリ構築
 
 ## サービス概要
 
@@ -79,12 +79,12 @@ LINE登録 → リッチメニュー → LIFF診断 → 結果表示 → 予約 
 - Supabase保存
 - QR会員証、ポイントカード、来店管理
 - 管理画面、CSVエクスポート
-- Netlify / Vercelデプロイ
+- Cloudflare Workers / Netlify / Vercelデプロイ
 - 非エンジニアの発注者に伝わるデモ設計
 
 ## 追加された機能一覧
 
-- Netlify / Vercelデプロイ対応
+- Cloudflare Workers / Netlify / Vercelデプロイ対応
 - Supabase保存
 - Slack通知実装
 - QR会員証デモ
@@ -193,13 +193,13 @@ URL:
 
 ## LINEアプリとして動かす手順
 
-Netlifyへデプロイした後、LINE DevelopersでLIFFアプリを作成すると、LINE公式アカウントのリッチメニューからこのアプリを開けます。
+公開URLへデプロイした後、LINE DevelopersでLIFFアプリを作成すると、LINE公式アカウントのリッチメニューからこのアプリを開けます。
 
-1. Netlifyで公開URLを発行
+1. Cloudflare Workers、Netlify、Vercelなどで公開URLを発行
 2. LINE Official Account ManagerでLINE公式アカウントを作成
 3. LINE DevelopersでMessaging APIチャネルを確認
-4. LIFFアプリを作成し、Endpoint URLにNetlify公開URLを設定
-5. 発行されたLIFF IDをNetlifyの `NEXT_PUBLIC_LIFF_ID` に設定
+4. LIFFアプリを作成し、Endpoint URLに公開URLを設定
+5. 発行されたLIFF IDを公開先の `NEXT_PUBLIC_LIFF_ID` に設定
 6. `NEXT_PUBLIC_USE_MOCK=false` に切り替えてRedeploy
 7. リッチメニューの「診断する」にLIFF URLを設定
 8. 必要に応じて「会員証」「店舗デモ」「美容室デモ」「スクールデモ」用のLIFFアプリも追加
@@ -342,11 +342,11 @@ ADMIN_PASSWORD=
 モックだけで公開する場合は、最低限以下で動きます。
 
 ```env
-NEXT_PUBLIC_APP_URL=https://your-site.netlify.app
+NEXT_PUBLIC_APP_URL=https://line-diagnosis-reservation-demo.pachiscope.workers.dev
 NEXT_PUBLIC_USE_MOCK=true
 ```
 
-詳細は [docs/deployment-netlify.md](docs/deployment-netlify.md) を参照してください。Netlifyの無料クレジットが使えない場合は、Cloudflare Workers用の [docs/deployment-cloudflare.md](docs/deployment-cloudflare.md) も用意しています。Vercelを使う場合の旧手順は [docs/deployment-vercel.md](docs/deployment-vercel.md) に残しています。
+今回の公開デモはCloudflare Workersで動かしています。詳細は [docs/deployment-cloudflare.md](docs/deployment-cloudflare.md) を参照してください。Netlifyを使う場合は [docs/deployment-netlify.md](docs/deployment-netlify.md)、Vercelを使う場合の旧手順は [docs/deployment-vercel.md](docs/deployment-vercel.md) に残しています。
 
 LINE公式アカウントからLIFFとして開く詳しい手順は [docs/line-official-account-setup.md](docs/line-official-account-setup.md) を参照してください。接続前の点検は [docs/line-production-checklist.md](docs/line-production-checklist.md)、管理画面とスタッフ画面の保護方針は [docs/admin-auth-plan.md](docs/admin-auth-plan.md) にまとめています。
 

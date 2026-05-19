@@ -13,6 +13,14 @@ Netlifyの無料クレジットが不足している場合の代替デプロイ�
 
 Cloudflare公式ドキュメントでは、Next.jsのApp Router、Route Handlers、SSG、SSRはOpenNext adapterでサポートされています。
 
+## 公開デモURL
+
+```text
+https://line-diagnosis-reservation-demo.pachiscope.workers.dev
+```
+
+このURLを `NEXT_PUBLIC_APP_URL` としてビルド時に指定すると、会員証QRコードや `/line-links` のEndpoint URL表示も公開URLにそろいます。
+
 ## 2. CloudflareでGitHub連携する場合
 
 1. Cloudflare Dashboardにログイン

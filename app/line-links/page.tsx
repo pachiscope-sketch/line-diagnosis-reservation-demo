@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const appUrl =
   process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") ??
-  "https://your-project.vercel.app";
+  "https://line-diagnosis-reservation-demo.pachiscope.workers.dev";
 
 const linkItems = [
   {
@@ -80,7 +80,7 @@ export default function LineLinksPage() {
             </span>
             <h2>リッチメニューに設定するURLをまとめて確認できます</h2>
             <p>
-              Vercelの公開URLはLINE DevelopersのLIFF Endpoint URLに設定します。LIFF IDが発行された後、
+              公開URLはLINE DevelopersのLIFF Endpoint URLに設定します。LIFF IDが発行された後、
               LINE公式アカウントのリッチメニューには{" "}
               <code>https://liff.line.me/{"{LIFF_ID}"}</code>
               形式のURLを設定します。
@@ -103,7 +103,7 @@ export default function LineLinksPage() {
         <section className="flow-note">
           <h2>Endpoint URLとRich menu URLの違い</h2>
           <p>
-            Endpoint URLは、LINE DevelopersのLIFFアプリ設定画面に登録するVercel側のURLです。
+            Endpoint URLは、LINE DevelopersのLIFFアプリ設定画面に登録する公開アプリ側のURLです。
             Rich menu URLは、LINE公式アカウントのリッチメニューに設定する{" "}
             <code>https://liff.line.me/{"{LIFF_ID}"}</code>
             形式のURLです。

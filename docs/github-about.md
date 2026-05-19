@@ -7,10 +7,10 @@ LINE LIFF diagnosis, reservation, Slack notification, Supabase, QR membership ca
 ## Website
 
 ```text
-https://your-project.vercel.app
+https://line-diagnosis-reservation-demo.pachiscope.workers.dev
 ```
 
-Vercelデプロイ後、実際のデモURLに差し替えてください。
+Cloudflare Workersで公開中のデモURLです。別環境に移す場合は実際の公開URLに差し替えてください。
 
 ## Topics
 
