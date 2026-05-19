@@ -38,12 +38,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, mode: "mock" });
   }
 
+  let timeout: ReturnType<typeof setTimeout> | undefined;
   try {
+    const controller = new AbortController();
+    timeout = setTimeout(() => controller.abort(), 5000);
     const slackResponse = await fetch(webhookUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
+      signal: controller.signal,
       body: JSON.stringify({
         text: message,
         blocks: [
@@ -66,7 +70,11 @@ export async function POST(request: Request) {
     });
 
     if (!slackResponse.ok) {
-      console.log("[slack notify failed]", await slackResponse.text());
+      console.log("[slack notify failed]", {
+        status: slackResponse.status,
+        statusText: slackResponse.statusText,
+        body: await slackResponse.text().catch(() => "")
+      });
       return NextResponse.json({
         ok: false,
         mode: "slack-error",
@@ -76,12 +84,18 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true, mode: "slack" });
   } catch (error) {
-    console.log("[slack notify exception]", error);
+    console.log("[slack notify exception]", {
+      reason: error instanceof Error ? error.message : String(error)
+    });
     return NextResponse.json({
       ok: false,
       mode: "slack-error",
       error: "Slack通知に失敗しました。ユーザー画面は継続します。"
     });
+  } finally {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
   }
 }
 

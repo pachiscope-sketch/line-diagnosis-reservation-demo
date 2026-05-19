@@ -7,7 +7,7 @@ import {
   isSupabaseConfigured,
   toReservationRow
 } from "@/lib/supabaseClient";
-import type { ReservationRecord } from "@/lib/types";
+import { reservationRecordSchema } from "@/lib/validation";
 
 export async function GET() {
   const supabase = getSupabaseServerClient();
@@ -42,15 +42,21 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const record = (await request.json().catch(() => null)) as ReservationRecord | null;
+  const json = await request.json().catch(() => null);
+  const parsed = reservationRecordSchema.safeParse(json);
 
-  if (!record) {
+  if (!parsed.success) {
     return NextResponse.json(
-      { ok: false, error: "予約データが不正です。" },
+      {
+        ok: false,
+        error: "予約データが不正です。",
+        issues: parsed.error.flatten().fieldErrors
+      },
       { status: 400 }
     );
   }
 
+  const record = parsed.data;
   const supabase = getSupabaseServerClient();
   let mode = isSupabaseConfigured() ? "supabase" : "mock";
 
@@ -91,7 +97,10 @@ export async function POST(request: Request) {
       }
     })
   }).catch((error) => {
-    console.log("[reservation notify failed but ignored]", error);
+    console.log("[reservation notify failed but reservation succeeded]", {
+      reservationId: record.id,
+      error
+    });
   });
 
   return NextResponse.json({

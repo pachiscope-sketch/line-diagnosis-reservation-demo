@@ -21,6 +21,10 @@
 
 LIFFアプリでは、LINE User IDを取得できるため、診断回答、予約、会員証、ポイント情報を同じユーザーにひもづけられます。
 
+`/line-links` では、リッチメニューやLIFF Endpoint URLに設定する候補URLを一覧で確認できます。
+
+6分割リッチメニューの文言、リンク先、デザイン方針は `docs/rich-menu-design.md` にまとめています。
+
 ## 実案件での注意点
 
 - LIFF Endpoint URLはHTTPSが必要

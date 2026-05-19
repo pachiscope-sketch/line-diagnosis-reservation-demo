@@ -64,15 +64,30 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
 `schema.sql` ではRLSを有効化しています。
 
-このポートフォリオでは、サーバー側API Routeから `SUPABASE_SERVICE_ROLE_KEY` を使って保存する想定です。Service Role Keyは必ずサーバー側環境変数にだけ設定し、ブラウザへ公開しないでください。
+このポートフォリオでは、ブラウザからSupabaseへ直接書き込むのではなく、Next.js API Routeを経由して保存します。API Route内で `SUPABASE_SERVICE_ROLE_KEY` を使い、診断回答、予約、会員情報をSupabaseへ保存する構成です。
+
+Service Role KeyはRLSを回避できる強い権限を持つため、必ずサーバー側環境変数にだけ設定してください。`NEXT_PUBLIC_` を付けたり、ブラウザへ渡したりしてはいけません。
+
+このデモはポートフォリオ用途のため、管理者ログインやスタッフ認証までは実装していません。本番ではRLSポリシーと認証設計が必須です。
 
 本番運用では以下を設計してください。
 
 - 管理者だけが全データを見られるポリシー
 - LINEユーザー本人だけが自分の会員証を見られるポリシー
 - 店舗スタッフが来店処理だけ行える権限
+- 管理者、スタッフ、LINEユーザー本人の参照範囲
+- 予約情報やメールアドレスを扱う画面のアクセス制御
 - 個人情報削除依頼への対応
 - 保存期間
+
+## 本番RLS設計の例
+
+- 管理者: `diagnosis_answers`、`reservations`、`customers` を全件閲覧可能
+- 店舗スタッフ: `customers` のポイント更新と来店回数更新だけ可能
+- LINEユーザー本人: 自分の `customers` レコードだけ閲覧可能
+- 公開フォーム: 直接DBへ書かず、API Routeでバリデーション後に保存
+
+LIFFで取得したLINE User IDを本人識別に使う場合も、単体では認証として十分ではありません。実案件では、LINE Login、独自管理者ログイン、スタッフログインの組み合わせを検討してください。
 
 ## Supabase未設定時
 

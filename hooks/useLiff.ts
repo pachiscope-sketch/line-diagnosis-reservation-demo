@@ -34,9 +34,22 @@ export function useLiff() {
     isReady,
     error,
     login,
-    modeLabel:
-      user.mode === "liff"
-        ? "LINE連携中：実際のLINEプロフィールを使用しています"
-        : "モックモード：デモユーザーとして表示しています"
+    modeLabel: getLiffModeLabel(user.liffStatus, error)
   };
+}
+
+function getLiffModeLabel(status: LiffUser["liffStatus"], error?: string) {
+  if (error || status === "error") {
+    return "LIFF初期化エラー：デモユーザーに切り替えています";
+  }
+
+  if (status === "connected") {
+    return "LINE連携中：実際のLINEプロフィールを使用しています";
+  }
+
+  if (status === "loginRequired") {
+    return "LIFF設定済み：LINEログイン前のためプレビュー表示です";
+  }
+
+  return "LIFF未設定：モックユーザーとして表示しています";
 }

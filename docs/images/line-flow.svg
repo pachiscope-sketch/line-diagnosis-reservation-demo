@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="リッチメニューからLIFFへの導線">
+  <rect width="900" height="560" fill="#f4fbf7"/>
+  <text x="80" y="80" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#15221b">リッチメニューからLIFFへ</text>
+  <g font-family="Arial, sans-serif" font-size="16" fill="#15221b">
+    <rect x="80" y="130" width="150" height="74" rx="8" fill="#ffffff" stroke="#dbe7df"/>
+    <text x="106" y="174">友だち追加</text>
+    <rect x="280" y="130" width="150" height="74" rx="8" fill="#ffffff" stroke="#dbe7df"/>
+    <text x="305" y="174">リッチメニュー</text>
+    <rect x="480" y="130" width="150" height="74" rx="8" fill="#ffffff" stroke="#dbe7df"/>
+    <text x="520" y="174">LIFF診断</text>
+    <rect x="680" y="130" width="150" height="74" rx="8" fill="#ffffff" stroke="#dbe7df"/>
+    <text x="720" y="174">予約</text>
+    <rect x="180" y="300" width="170" height="74" rx="8" fill="#ffffff" stroke="#dbe7df"/>
+    <text x="222" y="344">Slack通知</text>
+    <rect x="420" y="300" width="170" height="74" rx="8" fill="#ffffff" stroke="#dbe7df"/>
+    <text x="465" y="344">Supabase</text>
+    <rect x="660" y="300" width="170" height="74" rx="8" fill="#ffffff" stroke="#dbe7df"/>
+    <text x="705" y="344">管理画面</text>
+  </g>
+  <g stroke="#06c755" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M230 167 H280"/>
+    <path d="M430 167 H480"/>
+    <path d="M630 167 H680"/>
+    <path d="M755 204 C755 260 265 250 265 300"/>
+    <path d="M350 337 H420"/>
+    <path d="M590 337 H660"/>
+  </g>
+</svg>

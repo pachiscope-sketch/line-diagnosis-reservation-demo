@@ -16,12 +16,20 @@ export function saveDiagnosis(record: DiagnosisRecord) {
   saveRecords(diagnosisKey, [record, ...loadDiagnoses()]);
 }
 
+export function replaceDiagnoses(records: DiagnosisRecord[]) {
+  saveRecords(diagnosisKey, records);
+}
+
 export function loadReservations() {
   return loadRecords<ReservationRecord>(reservationKey);
 }
 
 export function saveReservation(record: ReservationRecord) {
   saveRecords(reservationKey, [record, ...loadReservations()]);
+}
+
+export function replaceReservations(records: ReservationRecord[]) {
+  saveRecords(reservationKey, records);
 }
 
 export function loadCustomers() {
@@ -35,8 +43,22 @@ export function saveCustomer(record: CustomerRecord) {
   saveRecords(customerKey, [record, ...existing]);
 }
 
+export function replaceCustomers(records: CustomerRecord[]) {
+  saveRecords(customerKey, records);
+}
+
 export function findCustomerByLineUserId(lineUserId: string) {
   return loadCustomers().find((customer) => customer.lineUserId === lineUserId);
+}
+
+export function clearLocalDemoData() {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.localStorage.removeItem(diagnosisKey);
+  window.localStorage.removeItem(reservationKey);
+  window.localStorage.removeItem(customerKey);
 }
 
 function loadRecords<T>(key: string): T[] {

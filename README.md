@@ -4,6 +4,46 @@ LINE公式アカウント構築、LIFFアプリ開発、診断フォーム、予
 
 LIFF ID、Supabase、Slackが未設定でもモックモードで動くため、Vercelにデプロイしてすぐ営業デモとして使えます。
 
+## VercelデモURL
+
+```text
+https://your-project.vercel.app
+```
+
+デプロイ後、この欄を実際のURLに差し替えてください。
+
+## すぐ確認できるデモリンク
+
+- [店舗向けデモ](https://your-project.vercel.app/demo/store): 来店予約、クーポン、QR会員証、ポイントカード
+- [美容室向けデモ](https://your-project.vercel.app/demo/beauty): 髪のお悩み診断、メニュー提案、予約、再来店
+- [スクール向けデモ](https://your-project.vercel.app/demo/school): 講座診断、無料相談予約、資料請求、見込み客管理
+- [管理画面](https://your-project.vercel.app/admin): 診断回答、予約、会員、CSV出力、連携状態
+- [QR会員証](https://your-project.vercel.app/member-card): ユーザー向け会員証、ポイント、来店回数
+- [スタッフ来店処理](https://your-project.vercel.app/staff): QR読み取り後のポイント付与モック
+- [LINE導線説明](https://your-project.vercel.app/line-flow): リッチメニューからLIFFへ遷移する図解
+- [リッチメニュー用リンク一覧](https://your-project.vercel.app/line-links): LINE公式アカウントに設定するURL確認
+
+## スクリーンショット
+
+| 診断トップ | 管理画面 |
+| --- | --- |
+| ![診断トップ](docs/images/top.svg) | ![管理画面](docs/images/admin.svg) |
+
+| QR会員証 | LINE導線説明 |
+| --- | --- |
+| ![QR会員証](docs/images/member-card.svg) | ![LINE導線説明](docs/images/line-flow.svg) |
+
+## このデモで応募しやすい案件
+
+- LINE公式アカウント構築
+- LIFFミニアプリ開発
+- Lステップ風の診断・ステップ配信導線
+- 店舗DX、会員証、ポイントカード、来店管理
+- 美容室・サロンの予約率改善
+- スクール・講座販売の無料相談予約導線
+- Slack通知、Supabase保存、管理画面付きの業務改善
+- Vercelデプロイ込みの小規模Webアプリ構築
+
 ## サービス概要
 
 LINE公式アカウントを「配信だけ」で終わらせず、登録後のユーザーを診断、予約、会員化、再来店促進まで案内するデモアプリです。
@@ -96,9 +136,22 @@ URL:
 ## 画面
 
 - `/` 診断予約デモ
+- `/demo/store` 店舗向けデモ
+- `/demo/beauty` 美容室向けデモ
+- `/demo/school` スクール向けデモ
 - `/admin` 管理画面
-- `/member-card` QR会員証デモ
+- `/member-card` ユーザー向けQR会員証
+- `/staff` 店舗スタッフ向け来店処理
 - `/line-flow` リッチメニューからLIFFへの導線説明
+- `/line-links` リッチメニュー用リンク一覧
+
+## ユーザー画面・スタッフ画面・管理画面
+
+このデモは、実店舗運用を説明しやすいように3つの画面に分けています。
+
+- ユーザー画面: `/member-card` でLINE会員証、ポイント、来店回数を表示
+- スタッフ画面: `/staff` でQR読み取り後の来店処理とポイント付与を想定
+- 管理画面: `/admin` で診断回答、予約、会員情報、CSV出力、連携状態を確認
 
 ## LIFF連携
 
@@ -123,6 +176,25 @@ URL:
 ```
 
 実案件では、LINE User IDや表示名は個人情報に準じて扱い、利用目的、保存期間、削除依頼への対応を決めてから運用してください。
+
+## LINEアプリとして動かす手順
+
+Vercelへデプロイした後、LINE DevelopersでLIFFアプリを作成すると、LINE公式アカウントのリッチメニューからこのアプリを開けます。
+
+1. Vercelで公開URLを発行
+2. LINE Official Account ManagerでLINE公式アカウントを作成
+3. LINE DevelopersでMessaging APIチャネルを確認
+4. LIFFアプリを作成し、Endpoint URLにVercel URLを設定
+5. 発行されたLIFF IDをVercelの `NEXT_PUBLIC_LIFF_ID` に設定
+6. `NEXT_PUBLIC_USE_MOCK=false` に切り替えてRedeploy
+7. リッチメニューの「診断する」にLIFF URLを設定
+8. 必要に応じて「会員証」「店舗デモ」「美容室デモ」「スクールデモ」用のLIFFアプリも追加
+
+リッチメニューから診断画面へ誘導する場合は、診断トップ用LIFF URLを設定します。会員証を直接開かせたい場合は、Endpoint URLを `/member-card` にしたLIFFアプリを別途作ると説明しやすくなります。
+
+管理画面 `/admin` はユーザー向けのLINE画面ではなく、営業デモや運用担当者向けに共有するURLです。本番案件では認証を付けて、一般ユーザーには見せない構成にします。
+
+詳細手順は [docs/line-official-account-setup.md](docs/line-official-account-setup.md) を参照してください。
 
 ## Supabase保存
 
@@ -186,6 +258,8 @@ RLSについて:
 
 詳細は [docs/line-richmenu-flow.md](docs/line-richmenu-flow.md) を参照してください。
 
+リッチメニューに設定するURLは `/line-links` で一覧確認できます。6分割リッチメニューの文言、リンク先、デザイン方針は [docs/rich-menu-design.md](docs/rich-menu-design.md) にまとめています。
+
 ## ローカル起動手順
 
 ```bash
@@ -201,7 +275,9 @@ http://localhost:3000
 
 ```bash
 npm run lint
+npm run typecheck
 npm run build
+npm run check
 ```
 
 ## 環境変数
@@ -220,6 +296,9 @@ SUPABASE_SERVICE_ROLE_KEY=
 
 SLACK_WEBHOOK_URL=
 GOOGLE_SHEETS_SPREADSHEET_ID=
+
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=
 ```
 
 未設定でも動く項目:
@@ -227,6 +306,8 @@ GOOGLE_SHEETS_SPREADSHEET_ID=
 - LIFF ID未設定: モックユーザーで動作
 - Supabase未設定: ローカルストレージとモックデータで動作
 - Slack未設定: console.logでモック通知
+- `ADMIN_PASSWORD` 未設定: 管理画面は営業デモ用に未保護で表示
+- `ADMIN_PASSWORD` 設定済み: `/admin` と `/api/admin-data` に簡易Basic認証
 
 ## Vercelデプロイ手順
 
@@ -237,6 +318,7 @@ GOOGLE_SHEETS_SPREADSHEET_ID=
 5. Environment Variablesに必要な値を設定
 6. Deployを実行
 7. 発行されたURLを `NEXT_PUBLIC_APP_URL` とLINE DevelopersのLIFF Endpoint URLに設定
+8. LINEアプリとして開く場合は `NEXT_PUBLIC_LIFF_ID` と `NEXT_PUBLIC_USE_MOCK=false` を設定してRedeploy
 
 モックだけで公開する場合は、最低限以下で動きます。
 
@@ -246,6 +328,8 @@ NEXT_PUBLIC_USE_MOCK=true
 ```
 
 詳細は [docs/deployment-vercel.md](docs/deployment-vercel.md) を参照してください。
+
+LINE公式アカウントからLIFFとして開く詳しい手順は [docs/line-official-account-setup.md](docs/line-official-account-setup.md) を参照してください。管理画面の保護方針は [docs/admin-auth-plan.md](docs/admin-auth-plan.md) にまとめています。
 
 ## 実案件で拡張できること
 
@@ -268,6 +352,8 @@ NEXT_PUBLIC_USE_MOCK=true
 - Slack Webhook URLやSupabase Service Role Keyは公開しないでください。
 - LIFF Endpoint URLはHTTPSが必要です。
 - Messaging APIを使う場合は、LINE Developers側のWebhook設定も別途必要です。
+- 公開デモでは「ポートフォリオ用デモです。実際の個人情報は入力しないでください。」という注意文を表示しています。
+- 管理画面は本番案件では必ず認証を付け、閲覧権限を分けてください。
 
 ## スクリーンショット
 

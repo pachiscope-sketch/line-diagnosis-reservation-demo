@@ -36,7 +36,15 @@ import { useLiff } from "@/hooks/useLiff";
 
 type Screen = "top" | "diagnosis" | "result" | "reservation" | "complete";
 
-export function DemoApp({ initialDemo = "store" }: { initialDemo?: DemoType }) {
+export function DemoApp({
+  initialDemo = "store",
+  landingTitle,
+  landingDescription
+}: {
+  initialDemo?: DemoType;
+  landingTitle?: string;
+  landingDescription?: string;
+}) {
   const [pattern, setPattern] = useState<DemoPattern>(demoPatterns[initialDemo]);
   const [answers, setAnswers] = useState<DiagnosisAnswers>(
     createInitialAnswers(demoPatterns[initialDemo])
@@ -199,6 +207,8 @@ export function DemoApp({ initialDemo = "store" }: { initialDemo?: DemoType }) {
             pattern={pattern}
             selectedDemo={pattern.id}
             recommendation={recommendation}
+            landingTitle={landingTitle}
+            landingDescription={landingDescription}
             onSelectDemo={selectDemo}
             onStart={startDiagnosis}
           />
@@ -285,12 +295,16 @@ function TopScreen({
   pattern,
   selectedDemo,
   recommendation,
+  landingTitle,
+  landingDescription,
   onSelectDemo,
   onStart
 }: {
   pattern: DemoPattern;
   selectedDemo: DemoType;
   recommendation: ReturnType<typeof createRecommendation>;
+  landingTitle?: string;
+  landingDescription?: string;
   onSelectDemo: (type: DemoType) => void;
   onStart: () => void;
 }) {
@@ -306,6 +320,16 @@ function TopScreen({
           <span>クーポン</span>
         </div>
       </div>
+
+      {landingTitle && (
+        <article className="card compact-card demo-landing-card">
+          <p className="eyebrow">industry demo URL</p>
+          <h2>{landingTitle}</h2>
+          <p>{landingDescription}</p>
+        </article>
+      )}
+
+      <DemoWarning />
 
       <article className="hero-copy">
         <span className="pill">
@@ -512,18 +536,19 @@ function ReservationScreen({
           診断内容、LINE情報、希望日時をまとめて管理者へ通知します。実案件ではここからSlack、Supabase、Google
           Sheets、予約システムへ連携できます。
         </p>
+        <DemoWarning />
 
         <form className="form-stack" onSubmit={onSubmit}>
           <label>
             名前
-            <input name="name" type="text" placeholder="山田 太郎" required />
+            <input name="name" type="text" placeholder="デモ 太郎" required />
           </label>
           <label>
             メールアドレス
             <input
               name="email"
               type="email"
-              placeholder="client@example.com"
+              placeholder="demo@example.com"
               required
             />
           </label>
@@ -535,7 +560,7 @@ function ReservationScreen({
             相談内容
             <textarea
               name="consultation"
-              placeholder="LINEから予約を増やしたい、会員証も使いたい等"
+              placeholder="デモ入力例: LINEから予約を増やしたい、会員証も使いたい等"
               rows={4}
               required
             />
@@ -573,6 +598,9 @@ function CompleteScreen({
         <h2>{pattern.completionMessage}</h2>
         <p>管理者に通知されました</p>
         <p>回答内容は管理画面で確認できます</p>
+        <p>
+          この予約情報は管理画面、Slack通知、Supabase保存、CSV出力に反映されます。
+        </p>
       </article>
 
       {reservation && (
@@ -595,7 +623,7 @@ function CompleteScreen({
         </article>
       )}
 
-      <Link className="secondary-button" href="/admin">
+      <Link className="primary-button" href="/admin">
         管理画面で確認する
         <Users size={20} />
       </Link>
@@ -631,15 +659,39 @@ function UserStrip({
       </div>
       <div>
         <strong>{isReady ? user.displayName : "LINE情報を確認中"}</strong>
+        <span className={`liff-state ${user.liffStatus}`}>
+          {getLiffStateLabel(user.liffStatus)}
+        </span>
         <span>{error ?? modeLabel}</span>
       </div>
-      {login && user.mode === "mock" && (
+      {login && user.liffStatus === "loginRequired" && (
         <button className="mini-button" type="button" onClick={login}>
           LINEログイン
         </button>
       )}
     </div>
   );
+}
+
+function DemoWarning() {
+  return (
+    <div className="demo-warning" role="note">
+      ポートフォリオ用デモです。実際の個人情報は入力しないでください。
+    </div>
+  );
+}
+
+function getLiffStateLabel(status: LiffUser["liffStatus"]) {
+  switch (status) {
+    case "connected":
+      return "LIFFログイン済み";
+    case "loginRequired":
+      return "LIFF設定済み・未ログイン";
+    case "error":
+      return "LIFFエラー・モック表示";
+    default:
+      return "LIFF未設定・モック";
+  }
 }
 
 function OptionGrid({

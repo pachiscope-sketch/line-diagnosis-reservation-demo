@@ -3,10 +3,7 @@
 import {
   ArrowLeft,
   BadgeCheck,
-  CalendarCheck,
   IdCard,
-  QrCode,
-  ScanLine,
   Sparkles,
   Stamp
 } from "lucide-react";
@@ -14,18 +11,16 @@ import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useMemo, useState } from "react";
 import { useLiff } from "@/hooks/useLiff";
+import { createCustomerFromUser } from "@/lib/member";
 import {
   findCustomerByLineUserId,
   saveCustomer
 } from "@/lib/storage";
-import type { CustomerRecord, LiffUser } from "@/lib/types";
+import type { CustomerRecord } from "@/lib/types";
 
 export function MemberCardDemo() {
   const { user, modeLabel } = useLiff();
   const [customer, setCustomer] = useState<CustomerRecord | null>(null);
-  const [staffMessage, setStaffMessage] = useState(
-    "QRを読み取った後、スタッフが来店処理する想定の画面です。"
-  );
 
   useEffect(() => {
     const localCustomer = findCustomerByLineUserId(user.userId);
@@ -39,7 +34,7 @@ export function MemberCardDemo() {
       .then((response) => response.json())
       .then((payload: { customers?: CustomerRecord[] }) => {
         const remoteCustomer = payload.customers?.[0];
-        const nextCustomer = remoteCustomer ?? createCustomer(user);
+        const nextCustomer = remoteCustomer ?? createCustomerFromUser(user);
         setCustomer(nextCustomer);
         saveCustomer(nextCustomer);
 
@@ -56,7 +51,7 @@ export function MemberCardDemo() {
         return undefined;
       })
       .catch(() => {
-        const nextCustomer = createCustomer(user);
+        const nextCustomer = createCustomerFromUser(user);
         setCustomer(nextCustomer);
         saveCustomer(nextCustomer);
       });
@@ -69,33 +64,6 @@ export function MemberCardDemo() {
     [customer]
   );
 
-  function addVisitStamp() {
-    if (!customer) {
-      return;
-    }
-
-    const nextCustomer: CustomerRecord = {
-      ...customer,
-      points: customer.points + 40,
-      visitCount: customer.visitCount + 1,
-      lastVisitAt: new Date().toISOString()
-    };
-
-    setCustomer(nextCustomer);
-    saveCustomer(nextCustomer);
-    setStaffMessage(
-      `${nextCustomer.lineDisplayName}さんの来店処理を完了しました。40pt付与されています。`
-    );
-
-    fetch("/api/customers", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(nextCustomer)
-    }).catch((error) => console.log("[customer stamp api failed]", error));
-  }
-
   return (
     <main className="app-shell">
       <section className="phone-frame" aria-label="LINE会員証デモ">
@@ -106,6 +74,7 @@ export function MemberCardDemo() {
           </div>
           <nav className="header-actions" aria-label="デモ内リンク">
             <Link href="/">診断</Link>
+            <Link href="/staff">スタッフ</Link>
             <Link href="/admin">管理</Link>
           </nav>
         </header>
@@ -163,31 +132,10 @@ export function MemberCardDemo() {
             <p className="member-note">{modeLabel}</p>
           </div>
 
-          <button className="primary-button" type="button" onClick={addVisitStamp}>
-            来店スタンプを追加
+          <Link className="primary-button" href="/staff">
+            スタッフ向け来店処理を見る
             <Stamp size={20} />
-          </button>
-
-          <article className="card">
-            <span className="section-icon">
-              <ScanLine size={20} />
-            </span>
-            <h2>スタッフ向け来店処理モック</h2>
-            <p>
-              実案件では、スタッフがQRを読み取り、来店履歴とポイントを更新する画面にできます。
-            </p>
-            <div className="staff-panel">
-              <div>
-                <QrCode size={18} />
-                <span>{customer?.memberQrCode ?? "QR読み取り待ち"}</span>
-              </div>
-              <p>{staffMessage}</p>
-              <button className="secondary-button" type="button" onClick={addVisitStamp}>
-                QR読み取り後の来店処理
-                <CalendarCheck size={20} />
-              </button>
-            </div>
-          </article>
+          </Link>
 
           <article className="card compact-card">
             <span className="section-icon">
@@ -202,23 +150,6 @@ export function MemberCardDemo() {
       </section>
     </main>
   );
-}
-
-function createCustomer(user: LiffUser): CustomerRecord {
-  const suffix = user.userId.slice(-4).padStart(4, "0");
-  const id = `LINE-DEMO-${suffix}`;
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
-
-  return {
-    id,
-    createdAt: new Date().toISOString(),
-    lineUserId: user.userId,
-    lineDisplayName: user.displayName,
-    memberQrCode: `${appUrl}/member-card?member=${id}&lineUserId=${user.userId}`,
-    points: 120,
-    visitCount: 3,
-    lastVisitAt: new Date().toISOString()
-  };
 }
 
 function formatDate(value?: string) {

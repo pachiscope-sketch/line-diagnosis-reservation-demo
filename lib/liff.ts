@@ -16,6 +16,7 @@ type LiffInstance = {
 
 export const mockLiffUser: LiffUser = {
   mode: "mock",
+  liffStatus: "mock",
   userId: "Udemo1234567890",
   displayName: "Demo User",
   pictureUrl: "",
@@ -52,6 +53,8 @@ export async function initializeLiffProfile(): Promise<{
       return {
         user: {
           ...mockLiffUser,
+          liffStatus: "loginRequired",
+          userId: "UloginRequiredPreview",
           displayName: "LINEログイン前のデモユーザー",
           isInClient: liff.isInClient()
         },
@@ -64,6 +67,7 @@ export async function initializeLiffProfile(): Promise<{
     return {
       user: {
         mode: "liff",
+        liffStatus: "connected",
         userId: profile.userId,
         displayName: profile.displayName,
         pictureUrl: profile.pictureUrl,
@@ -75,7 +79,10 @@ export async function initializeLiffProfile(): Promise<{
   } catch (error) {
     console.log("[liff fallback to mock]", error);
     return {
-      user: mockLiffUser,
+      user: {
+        ...mockLiffUser,
+        liffStatus: "error"
+      },
       error: "LIFF初期化に失敗したため、モックモードで表示しています。"
     };
   }

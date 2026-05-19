@@ -6,11 +6,14 @@ import {
   CalendarDays,
   Database,
   Download,
+  ExternalLink,
   FileSpreadsheet,
   IdCard,
   ListChecks,
   MessageSquareText,
+  PlusCircle,
   PlugZap,
+  RefreshCw,
   Users
 } from "lucide-react";
 import Link from "next/link";
@@ -18,9 +21,13 @@ import { useEffect, useMemo, useState } from "react";
 import { demoPatterns } from "@/lib/demoPatterns";
 import { mockCustomers, mockDiagnoses, mockReservations } from "@/lib/mockData";
 import {
+  clearLocalDemoData,
   loadCustomers,
   loadDiagnoses,
-  loadReservations
+  loadReservations,
+  replaceCustomers,
+  replaceDiagnoses,
+  replaceReservations
 } from "@/lib/storage";
 import type {
   AdminData,
@@ -104,6 +111,28 @@ export function AdminDashboard() {
     [adminData.diagnoses]
   );
 
+  function addDemoData() {
+    const nextData: AdminData = {
+      ...adminData,
+      mode: "local",
+      diagnoses: mergeById(mockDiagnoses, adminData.diagnoses),
+      reservations: mergeById(mockReservations, adminData.reservations),
+      customers: mergeById(mockCustomers, adminData.customers)
+    };
+
+    replaceDiagnoses(nextData.diagnoses);
+    replaceReservations(nextData.reservations);
+    replaceCustomers(nextData.customers);
+    setAdminData(nextData);
+  }
+
+  function resetLocalData() {
+    clearLocalDemoData();
+    if (typeof window !== "undefined") {
+      window.location.reload();
+    }
+  }
+
   return (
     <main className="app-shell admin-shell">
       <section className="phone-frame admin-frame">
@@ -115,6 +144,7 @@ export function AdminDashboard() {
           <nav className="header-actions" aria-label="デモ内リンク">
             <Link href="/">診断</Link>
             <Link href="/member-card">会員証</Link>
+            <Link href="/staff">スタッフ</Link>
             <Link href="/line-flow">導線</Link>
           </nav>
         </header>
@@ -124,6 +154,10 @@ export function AdminDashboard() {
             <ArrowLeft size={18} />
             デモ画面へ
           </Link>
+
+          <div className="demo-warning" role="note">
+            ポートフォリオ用デモです。実際の個人情報は入力しないでください。
+          </div>
 
           <div className="status-strip">
             <StatusPill
@@ -146,6 +180,34 @@ export function AdminDashboard() {
               label="LIFF"
               value={adminData.status.liffConfigured ? "接続可" : "モック"}
             />
+          </div>
+
+          <article className="card admin-note-card">
+            <h2>連携状態の見方</h2>
+            <p>
+              保存先は、Supabase設定済みならDB、未設定ならブラウザ内のローカル保存またはモックデータです。
+              Slack未設定時は通知をconsole.logに出すため、営業デモ中に画面は止まりません。
+              LIFF未設定時はモックユーザー、設定済み未ログイン時はLINEログイン前プレビューとして表示します。
+            </p>
+          </article>
+
+          <div className="admin-action-row">
+            <button className="secondary-button" type="button" onClick={addDemoData}>
+              デモデータを追加
+              <PlusCircle size={20} />
+            </button>
+            <button className="secondary-button" type="button" onClick={resetLocalData}>
+              ローカルデータをリセット
+              <RefreshCw size={20} />
+            </button>
+            <Link className="secondary-button" href="/staff">
+              スタッフ画面へ
+              <ExternalLink size={20} />
+            </Link>
+            <Link className="secondary-button" href="/member-card">
+              会員証画面へ
+              <IdCard size={20} />
+            </Link>
           </div>
 
           <div className="filter-tabs" aria-label="デモ種別フィルター">
@@ -191,21 +253,21 @@ export function AdminDashboard() {
               title="業種別の件数"
               icon={<BarChart3 size={20} />}
               counts={industryCounts}
-              actionLabel="診断回答CSVをエクスポート"
+              actionLabel="診断回答をCSV出力"
               onExport={() => exportDiagnoses(diagnoses)}
             />
             <StatsCard
               title="目的別の件数"
               icon={<Users size={20} />}
               counts={goalCounts}
-              actionLabel="予約CSVをエクスポート"
+              actionLabel="予約一覧をCSV出力"
               onExport={() => exportReservations(reservations)}
             />
             <StatsCard
               title="デモ種別ごとの件数"
               icon={<FileSpreadsheet size={20} />}
               counts={demoCounts}
-              actionLabel="会員CSVをエクスポート"
+              actionLabel="会員一覧をCSV出力"
               onExport={() => exportCustomers(customers)}
             />
           </section>
@@ -311,12 +373,13 @@ function StatsCard({
           <h2>{title}</h2>
         </div>
         <button
-          className="icon-button"
+          className="export-button"
           type="button"
           title={actionLabel}
           onClick={onExport}
         >
           <Download size={18} />
+          <span>{actionLabel}</span>
         </button>
       </div>
       <StatsList counts={counts} />

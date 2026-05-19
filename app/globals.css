@@ -162,6 +162,42 @@ a {
   font-size: 12px;
 }
 
+.liff-state {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: var(--line-dark);
+  font-size: 11px;
+  font-weight: 800;
+  background: rgba(6, 199, 85, 0.12);
+}
+
+.liff-state.loginRequired {
+  color: #8a5a00;
+  background: rgba(255, 176, 32, 0.18);
+}
+
+.liff-state.error {
+  color: #b42318;
+  background: rgba(180, 35, 24, 0.1);
+}
+
+.demo-warning {
+  border: 1px solid rgba(255, 176, 32, 0.42);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #7a4a00;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.55;
+  background: rgba(255, 176, 32, 0.12);
+}
+
+.card .demo-warning {
+  margin-top: 12px;
+}
+
 .avatar {
   display: grid;
   width: 38px;
@@ -392,6 +428,10 @@ a {
 .demo-card.selected {
   border-color: rgba(6, 199, 85, 0.56);
   background: rgba(6, 199, 85, 0.1);
+}
+
+.demo-landing-card h2 {
+  margin-top: 4px;
 }
 
 .feature-card,
@@ -824,6 +864,16 @@ a {
   gap: 8px;
 }
 
+.admin-note-card h2 {
+  margin-top: 0;
+}
+
+.admin-action-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
 .status-pill {
   display: grid;
   gap: 5px;
@@ -917,6 +967,21 @@ a {
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--line-dark);
+  background: #ffffff;
+}
+
+.export-button {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 10px;
+  color: var(--line-dark);
+  font-size: 12px;
+  font-weight: 800;
   background: #ffffff;
 }
 
@@ -1122,6 +1187,65 @@ a {
   margin: 0 0 8px;
 }
 
+.rich-menu-spec {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.rich-menu-spec a,
+.link-copy-row {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.rich-menu-spec a {
+  display: grid;
+  gap: 4px;
+  min-height: 76px;
+  padding: 12px;
+}
+
+.rich-menu-spec strong {
+  color: var(--line-dark);
+  font-size: 14px;
+}
+
+.rich-menu-spec span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.link-copy-list {
+  display: grid;
+  gap: 10px;
+}
+
+.link-copy-row {
+  display: grid;
+  gap: 7px;
+  padding: 12px;
+}
+
+.link-copy-row label {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.link-copy-row input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  background: var(--soft);
+}
+
 @media (max-width: 374px) {
   .app-shell {
     padding: 0;
@@ -1148,9 +1272,11 @@ a {
 
   .status-strip,
   .admin-summary-grid,
+  .admin-action-row,
   .admin-grid,
   .flow-hero,
-  .flow-grid {
+  .flow-grid,
+  .rich-menu-spec {
     grid-template-columns: 1fr;
   }
 

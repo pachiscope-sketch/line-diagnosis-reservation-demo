@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="LINE診断予約デモ トップ画面">
+  <rect width="900" height="560" fill="#f4fbf7"/>
+  <rect x="250" y="32" width="400" height="496" rx="28" fill="#ffffff" stroke="#dbe7df"/>
+  <rect x="250" y="32" width="400" height="82" rx="28" fill="#06c755"/>
+  <text x="286" y="84" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#ffffff">LINE診断予約デモ</text>
+  <rect x="282" y="142" width="336" height="130" rx="8" fill="#edf8f1" stroke="#dbe7df"/>
+  <rect x="306" y="166" width="212" height="34" rx="17" fill="#ffffff"/>
+  <text x="326" y="189" font-family="Arial, sans-serif" font-size="16" fill="#15221b">診断から予約まで自動化</text>
+  <rect x="388" y="214" width="206" height="34" rx="17" fill="#06c755"/>
+  <text x="410" y="237" font-family="Arial, sans-serif" font-size="16" fill="#ffffff">LINE内で完結</text>
+  <text x="282" y="318" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#15221b">3業種に切り替え可能</text>
+  <text x="282" y="350" font-family="Arial, sans-serif" font-size="17" fill="#68756e">店舗・美容室・スクール向けのLIFFデモ</text>
+  <rect x="282" y="386" width="336" height="58" rx="8" fill="#06c755"/>
+  <text x="392" y="423" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#ffffff">診断を始める</text>
+</svg>

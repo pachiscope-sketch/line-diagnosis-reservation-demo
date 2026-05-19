@@ -6,7 +6,7 @@ import {
   isSupabaseConfigured,
   toDiagnosisRow
 } from "@/lib/supabaseClient";
-import type { DiagnosisRecord } from "@/lib/types";
+import { diagnosisRecordSchema } from "@/lib/validation";
 
 export async function GET() {
   const supabase = getSupabaseServerClient();
@@ -41,15 +41,21 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const record = (await request.json().catch(() => null)) as DiagnosisRecord | null;
+  const json = await request.json().catch(() => null);
+  const parsed = diagnosisRecordSchema.safeParse(json);
 
-  if (!record) {
+  if (!parsed.success) {
     return NextResponse.json(
-      { ok: false, error: "診断回答データが不正です。" },
+      {
+        ok: false,
+        error: "診断回答データが不正です。",
+        issues: parsed.error.flatten().fieldErrors
+      },
       { status: 400 }
     );
   }
 
+  const record = parsed.data;
   const supabase = getSupabaseServerClient();
 
   if (!supabase) {

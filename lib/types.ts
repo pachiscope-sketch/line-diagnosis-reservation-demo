@@ -3,9 +3,11 @@ export const demoTypes = ["store", "beauty", "school"] as const;
 export type DemoType = (typeof demoTypes)[number];
 
 export type LiffMode = "liff" | "mock";
+export type LiffStatus = "mock" | "loginRequired" | "connected" | "error";
 
 export type LiffUser = {
   mode: LiffMode;
+  liffStatus: LiffStatus;
   displayName: string;
   userId: string;
   pictureUrl?: string;

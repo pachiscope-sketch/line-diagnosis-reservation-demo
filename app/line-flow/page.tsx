@@ -54,6 +54,39 @@ const flowSteps = [
   }
 ];
 
+const richMenuItems = [
+  {
+    label: "診断する",
+    href: "/",
+    purpose: "全業種共通の診断トップへ誘導"
+  },
+  {
+    label: "店舗デモ",
+    href: "/demo/store",
+    purpose: "来店予約、クーポン、会員証を説明"
+  },
+  {
+    label: "美容室デモ",
+    href: "/demo/beauty",
+    purpose: "髪のお悩み診断から予約へ誘導"
+  },
+  {
+    label: "スクールデモ",
+    href: "/demo/school",
+    purpose: "講座診断から無料相談へ誘導"
+  },
+  {
+    label: "会員証",
+    href: "/member-card",
+    purpose: "QR会員証とポイントカードを表示"
+  },
+  {
+    label: "導線説明",
+    href: "/line-flow",
+    purpose: "LINE内でどう動くかを発注者に説明"
+  }
+];
+
 export default function LineFlowPage() {
   return (
     <main className="app-shell flow-shell">
@@ -66,6 +99,7 @@ export default function LineFlowPage() {
           <nav className="header-actions" aria-label="デモ内リンク">
             <Link href="/">診断</Link>
             <Link href="/member-card">会員証</Link>
+            <Link href="/line-links">リンク</Link>
             <Link href="/admin">管理</Link>
           </nav>
         </header>
@@ -77,12 +111,9 @@ export default function LineFlowPage() {
               <strong>30秒診断でおすすめプランを確認できます。</strong>
             </div>
             <div className="rich-menu-large">
-              <span>診断する</span>
-              <span>予約する</span>
-              <span>会員証</span>
-              <span>クーポン</span>
-              <span>店舗情報</span>
-              <span>相談</span>
+              {richMenuItems.map((item) => (
+                <span key={item.label}>{item.label}</span>
+              ))}
             </div>
           </div>
           <article>
@@ -114,6 +145,14 @@ export default function LineFlowPage() {
             リッチメニューの「診断する」にLIFF URLを設定します。LIFFアプリ内でLINE User
             IDを取得し、診断回答、予約、会員証を同じユーザー情報にひもづけることで、配信だけで終わらない顧客導線を作れます。
           </p>
+          <div className="rich-menu-spec" aria-label="6分割リッチメニュー案">
+            {richMenuItems.map((item) => (
+              <Link href={item.href} key={item.label}>
+                <strong>{item.label}</strong>
+                <span>{item.purpose}</span>
+              </Link>
+            ))}
+          </div>
         </section>
       </section>
     </main>
