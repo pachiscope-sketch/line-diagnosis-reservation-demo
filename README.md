@@ -6,7 +6,9 @@ LIFF ID、Supabase、Slackが未設定でもモックモードで動くため、
 
 ## デモURL
 
-デプロイ後、`https://your-project.vercel.app` を実際のVercel URLに差し替えてください。
+デプロイ後、`https://your-project.vercel.app` を実際のVercel URLに差し替えてください。`NEXT_PUBLIC_APP_URL` にも同じURLを設定すると、会員証QRやLINEリンク一覧の基準URLとして使えます。
+
+実URLへ差し替えたREADMEは、そのままGitHubポートフォリオ、Upwork、クラウドワークス、営業DM、提案文の添付資料として使えます。
 
 | 画面 | URL | 見せられる内容 |
 | --- | --- | --- |
@@ -22,7 +24,7 @@ LIFF ID、Supabase、Slackが未設定でもモックモードで動くため、
 
 ## スクリーンショット
 
-実際の画面キャプチャはPNGで以下に配置する想定です。まだPNGがない場合は、`docs/images/*.svg` のプレースホルダーを参考に撮影してください。
+実際の画面キャプチャはPNGで以下に配置する想定です。現在PNG未配置の場合は、[docs/images/README.md](docs/images/README.md) の撮影手順に沿って追加してください。
 
 | 診断トップ | 診断結果 | QR会員証 |
 | --- | --- | --- |
