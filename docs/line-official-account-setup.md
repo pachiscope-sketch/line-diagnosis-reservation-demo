@@ -1,6 +1,6 @@
 # LINE公式アカウント連携セットアップ
 
-この手順では、Vercelに公開した「LINE診断予約デモ」を、LINE公式アカウントのリッチメニューからLIFFアプリとして開ける状態に近づけます。
+この手順では、Netlifyに公開した「LINE診断予約デモ」を、LINE公式アカウントのリッチメニューからLIFFアプリとして開ける状態に近づけます。
 
 ## 1. LINE公式アカウントを作成する
 
@@ -21,16 +21,18 @@
 
 このデモはLIFF、予約、通知、管理画面のポートフォリオなので、Messaging APIのWebhook実装は拡張ポイントです。
 
-## 3. Vercelへデプロイする
+## 3. Netlifyへデプロイする
 
 1. GitHubにリポジトリをpush
-2. VercelでNew Projectを作成
+2. NetlifyでNew site from Gitを作成
 3. GitHubリポジトリを選択
-4. Framework PresetをNext.jsにする
-5. 初回は以下の最小設定で公開できます
+4. Branchを `main` にする
+5. Build commandを `npm run build` にする
+6. Publish directoryを `.next` にする
+7. 初回は以下の最小設定で公開できます
 
 ```env
-NEXT_PUBLIC_APP_URL=https://your-project.vercel.app
+NEXT_PUBLIC_APP_URL=https://your-site.netlify.app
 NEXT_PUBLIC_USE_MOCK=true
 ```
 
@@ -46,44 +48,44 @@ NEXT_PUBLIC_USE_MOCK=true
 4. Addを押してLIFFアプリを追加
 5. LIFF app nameに「LINE診断予約デモ」などを入力
 6. SizeはFullを推奨
-7. Endpoint URLにVercel URLを設定
+7. Endpoint URLにNetlify公開URLを設定
 
 例:
 
 ```text
-https://your-project.vercel.app
+https://your-site.netlify.app
 ```
 
 業種別ボタンをLIFFとして直接開きたい場合は、LIFFアプリを複数作り、それぞれのEndpoint URLを以下のように分けると説明しやすくなります。
 
 ```text
-https://your-project.vercel.app/demo/store
-https://your-project.vercel.app/demo/beauty
-https://your-project.vercel.app/demo/school
-https://your-project.vercel.app/member-card
+https://your-site.netlify.app/demo/store
+https://your-site.netlify.app/demo/beauty
+https://your-site.netlify.app/demo/school
+https://your-site.netlify.app/member-card
 ```
 
 スタッフ向け来店処理画面は以下です。
 
 ```text
-https://your-project.vercel.app/staff
+https://your-site.netlify.app/staff
 ```
 
 `/staff` はQR会員証を読み取った後のポイント付与や来店処理を見せるスタッフ専用URLです。実案件では、一般ユーザー向けリッチメニューに直接出すのは非推奨です。店舗スタッフ用のブックマーク、管理画面内リンク、またはスタッフ専用ログイン後の導線として共有します。
 
-## 5. Vercel環境変数にLIFF IDを設定する
+## 5. Netlify環境変数にLIFF IDを設定する
 
 LIFFアプリ作成後、LIFF IDが発行されます。
 
-VercelのProject Settings → Environment Variablesで以下を設定します。
+NetlifyのSite configuration → Environment variablesで以下を設定します。
 
 ```env
 NEXT_PUBLIC_LIFF_ID=xxxxxxxxxx-xxxxxxxx
 NEXT_PUBLIC_USE_MOCK=false
-NEXT_PUBLIC_APP_URL=https://your-project.vercel.app
+NEXT_PUBLIC_APP_URL=https://your-site.netlify.app
 ```
 
-設定後、VercelでRedeployします。
+設定後、NetlifyでRedeployします。
 
 `NEXT_PUBLIC_USE_MOCK=false` にすると、LIFF IDがある場合に `liff.init()` を実行し、LINEログイン状態を確認します。
 
@@ -106,9 +108,9 @@ LINE Official Account Managerでリッチメニューを作成し、各領域の
 | 美容室デモ | `https://liff.line.me/{美容室用LIFF_ID}` | 美容室予約提案 |
 | スクールデモ | `https://liff.line.me/{スクール用LIFF_ID}` | 講座診断提案 |
 | 会員証 | `https://liff.line.me/{会員証用LIFF_ID}` | QR会員証表示 |
-| 導線説明 | `https://your-project.vercel.app/line-flow` | 発注者向け説明 |
+| 導線説明 | `https://your-site.netlify.app/line-flow` | 発注者向け説明 |
 
-テスト用には `/line-links` ページでVercel Endpoint URLを一覧確認できます。
+テスト用には `/line-links` ページでNetlify Endpoint URLを一覧確認できます。
 
 `/staff` はスタッフ専用の来店処理画面です。リッチメニューに直接置くと一般ユーザーも開けてしまうため、本番では認証を付けたスタッフ専用URLとして共有してください。
 

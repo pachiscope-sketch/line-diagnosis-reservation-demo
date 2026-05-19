@@ -2,25 +2,25 @@
 
 LINE公式アカウント構築、LIFFアプリ開発、診断フォーム、予約導線、Slack通知、Supabase保存、QR会員証をまとめて見せるポートフォリオ用デモです。
 
-LIFF ID、Supabase、Slackが未設定でもモックモードで動くため、Vercelにデプロイしてすぐ営業デモとして使えます。
+LIFF ID、Supabase、Slackが未設定でもモックモードで動くため、Netlifyなどにデプロイしてすぐ営業デモとして使えます。
 
 ## デモURL
 
-デプロイ後、`https://your-project.vercel.app` を実際のVercel URLに差し替えてください。`NEXT_PUBLIC_APP_URL` にも同じURLを設定すると、会員証QRやLINEリンク一覧の基準URLとして使えます。
+デプロイ後、`https://your-site.netlify.app` を実際のNetlify公開URLに差し替えてください。`NEXT_PUBLIC_APP_URL` にも同じURLを設定すると、会員証QRやLINEリンク一覧の基準URLとして使えます。
 
 実URLへ差し替えたREADMEは、そのままGitHubポートフォリオ、Upwork、クラウドワークス、営業DM、提案文の添付資料として使えます。
 
 | 画面 | URL | 見せられる内容 |
 | --- | --- | --- |
-| 診断トップ | `https://your-project.vercel.app` | LINE登録後の診断、結果表示、予約導線 |
-| 店舗向けデモ | `https://your-project.vercel.app/demo/store` | 来店予約、クーポン、QR会員証、ポイントカード |
-| 美容室向けデモ | `https://your-project.vercel.app/demo/beauty` | 髪のお悩み診断、メニュー提案、予約、再来店 |
-| スクール向けデモ | `https://your-project.vercel.app/demo/school` | 講座診断、無料相談予約、資料請求、見込み客管理 |
-| 会員証 | `https://your-project.vercel.app/member-card` | ユーザー向けQR会員証、ポイント、来店回数 |
-| スタッフ画面 | `https://your-project.vercel.app/staff` | QR読み取り後のポイント付与、来店処理 |
-| 管理画面 | `https://your-project.vercel.app/admin` | 診断回答、予約、会員、CSV出力、連携状態 |
-| LINEリンク一覧 | `https://your-project.vercel.app/line-links` | LINE公式アカウントに設定するURL一覧 |
-| LINE導線説明 | `https://your-project.vercel.app/line-flow` | リッチメニューからLIFFへ遷移する図解 |
+| 診断トップ | `https://your-site.netlify.app` | LINE登録後の診断、結果表示、予約導線 |
+| 店舗向けデモ | `https://your-site.netlify.app/demo/store` | 来店予約、クーポン、QR会員証、ポイントカード |
+| 美容室向けデモ | `https://your-site.netlify.app/demo/beauty` | 髪のお悩み診断、メニュー提案、予約、再来店 |
+| スクール向けデモ | `https://your-site.netlify.app/demo/school` | 講座診断、無料相談予約、資料請求、見込み客管理 |
+| 会員証 | `https://your-site.netlify.app/member-card` | ユーザー向けQR会員証、ポイント、来店回数 |
+| スタッフ画面 | `https://your-site.netlify.app/staff` | QR読み取り後のポイント付与、来店処理 |
+| 管理画面 | `https://your-site.netlify.app/admin` | 診断回答、予約、会員、CSV出力、連携状態 |
+| LINEリンク一覧 | `https://your-site.netlify.app/line-links` | LINE公式アカウントに設定するURL一覧 |
+| LINE導線説明 | `https://your-site.netlify.app/line-flow` | リッチメニューからLIFFへ遷移する図解 |
 
 ## スクリーンショット
 
@@ -54,7 +54,7 @@ docs/images/line-flow.png
 - 美容室・サロンの予約率改善
 - スクール・講座販売の無料相談予約導線
 - Slack通知、Supabase保存、管理画面付きの業務改善
-- Vercelデプロイ込みの小規模Webアプリ構築
+- Netlifyデプロイ込みの小規模Webアプリ構築
 
 ## サービス概要
 
@@ -79,12 +79,12 @@ LINE登録 → リッチメニュー → LIFF診断 → 結果表示 → 予約 
 - Supabase保存
 - QR会員証、ポイントカード、来店管理
 - 管理画面、CSVエクスポート
-- Vercelデプロイ
+- Netlify / Vercelデプロイ
 - 非エンジニアの発注者に伝わるデモ設計
 
 ## 追加された機能一覧
 
-- Vercelデプロイ対応
+- Netlify / Vercelデプロイ対応
 - Supabase保存
 - Slack通知実装
 - QR会員証デモ
@@ -193,13 +193,13 @@ URL:
 
 ## LINEアプリとして動かす手順
 
-Vercelへデプロイした後、LINE DevelopersでLIFFアプリを作成すると、LINE公式アカウントのリッチメニューからこのアプリを開けます。
+Netlifyへデプロイした後、LINE DevelopersでLIFFアプリを作成すると、LINE公式アカウントのリッチメニューからこのアプリを開けます。
 
-1. Vercelで公開URLを発行
+1. Netlifyで公開URLを発行
 2. LINE Official Account ManagerでLINE公式アカウントを作成
 3. LINE DevelopersでMessaging APIチャネルを確認
-4. LIFFアプリを作成し、Endpoint URLにVercel URLを設定
-5. 発行されたLIFF IDをVercelの `NEXT_PUBLIC_LIFF_ID` に設定
+4. LIFFアプリを作成し、Endpoint URLにNetlify公開URLを設定
+5. 発行されたLIFF IDをNetlifyの `NEXT_PUBLIC_LIFF_ID` に設定
 6. `NEXT_PUBLIC_USE_MOCK=false` に切り替えてRedeploy
 7. リッチメニューの「診断する」にLIFF URLを設定
 8. 必要に応じて「会員証」「店舗デモ」「美容室デモ」「スクールデモ」用のLIFFアプリも追加
@@ -327,25 +327,26 @@ ADMIN_PASSWORD=
 - `ADMIN_PASSWORD` 未設定: 管理画面は営業デモ用に未保護で表示
 - `ADMIN_PASSWORD` 設定済み: `/admin` と `/api/admin-data` に簡易Basic認証
 
-## Vercelデプロイ手順
+## Netlifyデプロイ手順
 
 1. GitHubにこのリポジトリをpush
-2. VercelでNew Projectを作成
+2. NetlifyでNew site from Gitを選択
 3. GitHubリポジトリを選択
-4. Framework PresetはNext.js
-5. Environment Variablesに必要な値を設定
-6. Deployを実行
-7. 発行されたURLを `NEXT_PUBLIC_APP_URL` とLINE DevelopersのLIFF Endpoint URLに設定
-8. LINEアプリとして開く場合は `NEXT_PUBLIC_LIFF_ID` と `NEXT_PUBLIC_USE_MOCK=false` を設定してRedeploy
+4. Branchは `main`
+5. Build commandは `npm run build`
+6. Publish directoryは `.next`
+7. 初回は `NEXT_PUBLIC_USE_MOCK=true` でDeploy
+8. 発行されたNetlify URLを `NEXT_PUBLIC_APP_URL` とLINE DevelopersのLIFF Endpoint URLに設定
+9. LINEアプリとして開く場合は `NEXT_PUBLIC_LIFF_ID` と `NEXT_PUBLIC_USE_MOCK=false` を設定してRedeploy
 
 モックだけで公開する場合は、最低限以下で動きます。
 
 ```env
-NEXT_PUBLIC_APP_URL=https://your-project.vercel.app
+NEXT_PUBLIC_APP_URL=https://your-site.netlify.app
 NEXT_PUBLIC_USE_MOCK=true
 ```
 
-詳細は [docs/deployment-vercel.md](docs/deployment-vercel.md) を参照してください。
+詳細は [docs/deployment-netlify.md](docs/deployment-netlify.md) を参照してください。Vercelを使う場合の旧手順は [docs/deployment-vercel.md](docs/deployment-vercel.md) に残しています。
 
 LINE公式アカウントからLIFFとして開く詳しい手順は [docs/line-official-account-setup.md](docs/line-official-account-setup.md) を参照してください。接続前の点検は [docs/line-production-checklist.md](docs/line-production-checklist.md)、管理画面とスタッフ画面の保護方針は [docs/admin-auth-plan.md](docs/admin-auth-plan.md) にまとめています。
 

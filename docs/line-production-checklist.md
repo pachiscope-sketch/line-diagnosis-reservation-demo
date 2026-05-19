@@ -4,20 +4,20 @@
 
 本番運用ではなく、まずは「LINE内で診断、予約、会員証が動く」ことを見せるための動作デモを想定しています。
 
-## 1. Vercelデプロイ確認
+## 1. Netlifyデプロイ確認
 
-- [ ] GitHubの `main` がVercelに接続されている
-- [ ] VercelのDeployが成功している
-- [ ] `https://your-project.vercel.app` でトップ画面が開く
+- [ ] GitHubの `main` がNetlifyに接続されている
+- [ ] NetlifyのDeployが成功している
+- [ ] `https://your-site.netlify.app` でトップ画面が開く
 - [ ] `/demo/store`、`/demo/beauty`、`/demo/school` が開く
 - [ ] `/member-card` が開く
 - [ ] `/line-links` が開く
 - [ ] `/admin` は営業デモ用URLとして開ける
 - [ ] `/staff` はスタッフ専用URLとして開ける
 
-## 2. Vercel環境変数確認
+## 2. Netlify環境変数確認
 
-- [ ] `NEXT_PUBLIC_APP_URL` にVercel公開URLを設定している
+- [ ] `NEXT_PUBLIC_APP_URL` にNetlify公開URLを設定している
 - [ ] `NEXT_PUBLIC_LIFF_ID` にLINE Developersで発行されたLIFF IDを設定している
 - [ ] `NEXT_PUBLIC_USE_MOCK=false` にしている
 - [ ] Supabaseを使う場合は `SUPABASE_URL` を設定している
@@ -33,25 +33,25 @@
 - [ ] Messaging APIチャネルが作成されている
 - [ ] LIFFアプリが作成されている
 - [ ] LIFF SizeはFullまたはTallにしている
-- [ ] LIFF Endpoint URLにVercel URLを設定している
+- [ ] LIFF Endpoint URLにNetlify公開URLを設定している
 - [ ] Endpoint URLはHTTPSになっている
 - [ ] Endpoint URLが実際にブラウザで開ける
-- [ ] LIFF IDをVercelの `NEXT_PUBLIC_LIFF_ID` に反映している
+- [ ] LIFF IDをNetlifyの `NEXT_PUBLIC_LIFF_ID` に反映している
 
 例:
 
 ```text
-Endpoint URL: https://your-project.vercel.app
+Endpoint URL: https://your-site.netlify.app
 Rich menu URL: https://liff.line.me/{LIFF_ID}
 ```
 
 業種別にLIFFを分ける場合:
 
 ```text
-Endpoint URL: https://your-project.vercel.app/demo/store
-Endpoint URL: https://your-project.vercel.app/demo/beauty
-Endpoint URL: https://your-project.vercel.app/demo/school
-Endpoint URL: https://your-project.vercel.app/member-card
+Endpoint URL: https://your-site.netlify.app/demo/store
+Endpoint URL: https://your-site.netlify.app/demo/beauty
+Endpoint URL: https://your-site.netlify.app/demo/school
+Endpoint URL: https://your-site.netlify.app/member-card
 ```
 
 ## 4. リッチメニュー設定確認
