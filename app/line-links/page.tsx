@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const appUrl =
   process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") ??
-  "https://line-diagnosis-reservation-demo.pachiscope.workers.dev";
+  "https://line-diagnosis-reservation-demo.onrender.com";
 
 const linkItems = [
   {

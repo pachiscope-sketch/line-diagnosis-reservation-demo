@@ -7,10 +7,10 @@ LINE LIFF diagnosis, reservation, Slack notification, Supabase, QR membership ca
 ## Website
 
 ```text
-https://line-diagnosis-reservation-demo.pachiscope.workers.dev
+https://line-diagnosis-reservation-demo.onrender.com
 ```
 
-Cloudflare Workersで公開中のデモURLです。別環境に移す場合は実際の公開URLに差し替えてください。
+Renderで公開中のデモURLです。別環境に移す場合は実際の公開URLに差し替えてください。
 
 ## Topics
 

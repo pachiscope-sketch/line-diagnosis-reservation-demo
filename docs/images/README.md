@@ -17,7 +17,7 @@ GitHub README冒頭に表示するためのスクリーンショット配置場�
 
 ## 撮影手順
 
-1. ローカルで `npm run dev` を実行、またはVercelデモURLを開く
+1. ローカルで `npm run dev` を実行、またはRenderなどの公開デモURLを開く
 2. Chrome DevToolsでスマホ幅を選択
 3. ユーザー向け画面は `390 x 844` 付近で撮影
 4. 管理画面はPC幅、または `1280 x 900` 付近で撮影

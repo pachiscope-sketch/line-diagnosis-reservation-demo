@@ -1,6 +1,6 @@
 # LINE公式アカウント連携セットアップ
 
-この手順では、Cloudflare Workers、Netlify、Vercelなどに公開した「LINE診断予約デモ」を、LINE公式アカウントのリッチメニューからLIFFアプリとして開ける状態に近づけます。
+この手順では、Render、Cloudflare Workers、Netlify、Vercelなどに公開した「LINE診断予約デモ」を、LINE公式アカウントのリッチメニューからLIFFアプリとして開ける状態に近づけます。
 
 ## 1. LINE公式アカウントを作成する
 
@@ -24,14 +24,14 @@
 ## 3. 公開URLへデプロイする
 
 1. GitHubにリポジトリをpush
-2. Cloudflare Workers、Netlify、Vercelなどで公開先を作成
+2. Render、Cloudflare Workers、Netlify、Vercelなどで公開先を作成
 3. GitHubリポジトリを選択
 4. Branchを `main` にする
 5. 公開先に合わせたBuild commandを設定
 6. 初回は以下の最小設定で公開できます
 
 ```env
-NEXT_PUBLIC_APP_URL=https://line-diagnosis-reservation-demo.pachiscope.workers.dev
+NEXT_PUBLIC_APP_URL=https://line-diagnosis-reservation-demo.onrender.com
 NEXT_PUBLIC_USE_MOCK=true
 ```
 
@@ -52,22 +52,22 @@ NEXT_PUBLIC_USE_MOCK=true
 例:
 
 ```text
-https://line-diagnosis-reservation-demo.pachiscope.workers.dev
+https://line-diagnosis-reservation-demo.onrender.com
 ```
 
 業種別ボタンをLIFFとして直接開きたい場合は、LIFFアプリを複数作り、それぞれのEndpoint URLを以下のように分けると説明しやすくなります。
 
 ```text
-https://line-diagnosis-reservation-demo.pachiscope.workers.dev/demo/store
-https://line-diagnosis-reservation-demo.pachiscope.workers.dev/demo/beauty
-https://line-diagnosis-reservation-demo.pachiscope.workers.dev/demo/school
-https://line-diagnosis-reservation-demo.pachiscope.workers.dev/member-card
+https://line-diagnosis-reservation-demo.onrender.com/demo/store
+https://line-diagnosis-reservation-demo.onrender.com/demo/beauty
+https://line-diagnosis-reservation-demo.onrender.com/demo/school
+https://line-diagnosis-reservation-demo.onrender.com/member-card
 ```
 
 スタッフ向け来店処理画面は以下です。
 
 ```text
-https://line-diagnosis-reservation-demo.pachiscope.workers.dev/staff
+https://line-diagnosis-reservation-demo.onrender.com/staff
 ```
 
 `/staff` はQR会員証を読み取った後のポイント付与や来店処理を見せるスタッフ専用URLです。実案件では、一般ユーザー向けリッチメニューに直接出すのは非推奨です。店舗スタッフ用のブックマーク、管理画面内リンク、またはスタッフ専用ログイン後の導線として共有します。
@@ -76,12 +76,12 @@ https://line-diagnosis-reservation-demo.pachiscope.workers.dev/staff
 
 LIFFアプリ作成後、LIFF IDが発行されます。
 
-Cloudflare、Netlify、Vercelなどの環境変数設定画面で以下を設定します。
+Render、Cloudflare、Netlify、Vercelなどの環境変数設定画面で以下を設定します。
 
 ```env
 NEXT_PUBLIC_LIFF_ID=xxxxxxxxxx-xxxxxxxx
 NEXT_PUBLIC_USE_MOCK=false
-NEXT_PUBLIC_APP_URL=https://line-diagnosis-reservation-demo.pachiscope.workers.dev
+NEXT_PUBLIC_APP_URL=https://line-diagnosis-reservation-demo.onrender.com
 ```
 
 設定後、公開先でRedeployします。
@@ -107,7 +107,7 @@ LINE Official Account Managerでリッチメニューを作成し、各領域の
 | 美容室デモ | `https://liff.line.me/{美容室用LIFF_ID}` | 美容室予約提案 |
 | スクールデモ | `https://liff.line.me/{スクール用LIFF_ID}` | 講座診断提案 |
 | 会員証 | `https://liff.line.me/{会員証用LIFF_ID}` | QR会員証表示 |
-| 導線説明 | `https://line-diagnosis-reservation-demo.pachiscope.workers.dev/line-flow` | 発注者向け説明 |
+| 導線説明 | `https://line-diagnosis-reservation-demo.onrender.com/line-flow` | 発注者向け説明 |
 
 テスト用には `/line-links` ページでEndpoint URLを一覧確認できます。
 

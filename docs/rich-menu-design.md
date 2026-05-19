@@ -29,7 +29,7 @@ LINEリッチメニューの大サイズ例:
 | 右上 | 美容室デモ | `https://liff.line.me/{美容室用LIFF_ID}` | 髪のお悩み診断、予約率改善の提案 |
 | 左下 | スクールデモ | `https://liff.line.me/{スクール用LIFF_ID}` | 講座診断、無料相談予約の提案 |
 | 中下 | 会員証 | `https://liff.line.me/{会員証用LIFF_ID}` | QR会員証、ポイントカード、来店管理 |
-| 右下 | 導線説明 | `https://line-diagnosis-reservation-demo.pachiscope.workers.dev/line-flow` | 発注者向けに全体の流れを説明 |
+| 右下 | 導線説明 | `https://line-diagnosis-reservation-demo.onrender.com/line-flow` | 発注者向けに全体の流れを説明 |
 
 ## デザイン方針
 

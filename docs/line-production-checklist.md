@@ -7,8 +7,8 @@
 ## 1. 公開デプロイ確認
 
 - [ ] GitHubの `main` が公開先に反映されている
-- [ ] Cloudflare Workers、Netlify、VercelなどのDeployが成功している
-- [ ] `https://line-diagnosis-reservation-demo.pachiscope.workers.dev` でトップ画面が開く
+- [ ] Render、Cloudflare Workers、Netlify、VercelなどのDeployが成功している
+- [ ] `https://line-diagnosis-reservation-demo.onrender.com` でトップ画面が開く
 - [ ] `/demo/store`、`/demo/beauty`、`/demo/school` が開く
 - [ ] `/member-card` が開く
 - [ ] `/line-links` が開く
@@ -41,17 +41,17 @@
 例:
 
 ```text
-Endpoint URL: https://line-diagnosis-reservation-demo.pachiscope.workers.dev
+Endpoint URL: https://line-diagnosis-reservation-demo.onrender.com
 Rich menu URL: https://liff.line.me/{LIFF_ID}
 ```
 
 業種別にLIFFを分ける場合:
 
 ```text
-Endpoint URL: https://line-diagnosis-reservation-demo.pachiscope.workers.dev/demo/store
-Endpoint URL: https://line-diagnosis-reservation-demo.pachiscope.workers.dev/demo/beauty
-Endpoint URL: https://line-diagnosis-reservation-demo.pachiscope.workers.dev/demo/school
-Endpoint URL: https://line-diagnosis-reservation-demo.pachiscope.workers.dev/member-card
+Endpoint URL: https://line-diagnosis-reservation-demo.onrender.com/demo/store
+Endpoint URL: https://line-diagnosis-reservation-demo.onrender.com/demo/beauty
+Endpoint URL: https://line-diagnosis-reservation-demo.onrender.com/demo/school
+Endpoint URL: https://line-diagnosis-reservation-demo.onrender.com/member-card
 ```
 
 ## 4. リッチメニュー設定確認
