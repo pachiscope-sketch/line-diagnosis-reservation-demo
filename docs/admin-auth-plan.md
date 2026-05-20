@@ -11,6 +11,7 @@
 - Cookie有効期限: 12時間
 - Cookie属性: `httpOnly`, `sameSite=lax`, 本番環境では `secure`
 - パスワード検証: サーバー側APIでのみ実行
+- 画面保護: `/admin` と `/staff` はサーバー側で認証状態を確認し、未認証時はページ本体を描画しない
 - 保護対象API: `/api/admin-data`
 
 `ADMIN_PASSWORD` が未設定の場合は、営業・応募用にすぐ見せられるデモモードとして従来通り表示します。

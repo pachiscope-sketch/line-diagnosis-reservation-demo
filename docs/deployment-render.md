@@ -114,12 +114,12 @@ Endpoint URL: https://line-diagnosis-reservation-demo.onrender.com/member-card
 | `NEXT_PUBLIC_APP_URL` | 公開URL、QRコード、リンク一覧の基準URL | ローカルまたは既定URLで表示 |
 | `NEXT_PUBLIC_LIFF_ID` | LINE Developersで発行したLIFF ID | モックまたはLIFF未設定表示 |
 | `NEXT_PUBLIC_USE_MOCK` | `true`ならブラウザ確認用モックを優先 | LIFF IDがあればLIFF初期化を試行 |
-| `ADMIN_PASSWORD` | `/admin` と `/staff` の簡易保護 | デモモードとして従来通り表示 |
+| `ADMIN_PASSWORD` | `/admin` と `/staff` の簡易パスワード保護 | デモモードとして従来通り表示 |
 | `SUPABASE_URL` | Supabase保存先URL | ローカル保存・モックデータで動作 |
 | `SUPABASE_SERVICE_ROLE_KEY` | API RouteからSupabaseへ保存するサーバー側キー | ローカル保存・モックデータで動作 |
 | `SLACK_WEBHOOK_URL` | 予約通知をSlackへ送るWebhook URL | `console.log` にモック通知 |
 
-`ADMIN_PASSWORD` を設定すると、`/admin` と `/staff` でパスワード入力画面が表示されます。値はRender側だけに保存し、READMEやGitHubには書かないでください。
+`ADMIN_PASSWORD` を設定すると、`/admin` と `/staff` でパスワード入力画面が表示されます。ログイン状態はHTTP-only Cookieで約12時間保持されます。値はRender側だけに保存し、READMEやGitHubには書かないでください。
 
 LIFF接続後の推奨例:
 

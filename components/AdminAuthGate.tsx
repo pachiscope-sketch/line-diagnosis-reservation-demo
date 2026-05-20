@@ -1,6 +1,7 @@
 "use client";
 
 import { LockKeyhole, LogOut, ShieldCheck } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { type FormEvent, type ReactNode, useEffect, useState } from "react";
 
 type AuthArea = "admin" | "staff";
@@ -32,18 +33,26 @@ const copyByArea = {
 
 export function AdminAuthGate({
   area,
+  initialStatus,
   children
 }: {
   area: AuthArea;
+  initialStatus?: AuthStatus;
   children: ReactNode;
 }) {
   const copy = copyByArea[area];
-  const [status, setStatus] = useState<AuthStatus | null>(null);
+  const router = useRouter();
+  const [status, setStatus] = useState<AuthStatus | null>(initialStatus ?? null);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+    if (initialStatus) {
+      setStatus(initialStatus);
+      return;
+    }
+
     fetch("/api/auth/admin-status", { cache: "no-store" })
       .then((response) => response.json())
       .then((payload: AuthStatus) => setStatus(payload))
@@ -51,7 +60,7 @@ export function AdminAuthGate({
         setStatus({ authenticated: false, demoMode: false });
         setError("認証状態を確認できませんでした。時間を置いて再読み込みしてください。");
       });
-  }, []);
+  }, [initialStatus]);
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -75,6 +84,7 @@ export function AdminAuthGate({
 
       setPassword("");
       setStatus(payload);
+      router.refresh();
     } catch {
       setError("ログイン処理に失敗しました。通信状態を確認してください。");
     } finally {
@@ -85,6 +95,7 @@ export function AdminAuthGate({
   async function handleLogout() {
     await fetch("/api/auth/admin-logout", { method: "POST" }).catch(() => undefined);
     setStatus({ authenticated: false, demoMode: false });
+    router.refresh();
   }
 
   if (!status) {
