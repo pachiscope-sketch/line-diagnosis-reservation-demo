@@ -90,3 +90,38 @@ Endpoint URL: https://line-diagnosis-reservation-demo.onrender.com/member-card
 - [ ] 本番ではSupabase RLS、管理者権限、スタッフ権限を設計する
 
 管理画面とスタッフ画面の保護方針は [admin-auth-plan.md](admin-auth-plan.md) を参照してください。
+## 追加チェック: 公開デモの管理系ページ保護
+
+- [ ] Renderに `ADMIN_PASSWORD` を設定している
+- [ ] `ADMIN_PASSWORD` 設定時に `/admin` でパスワード入力画面が表示される
+- [ ] `ADMIN_PASSWORD` 設定時に `/staff` でパスワード入力画面が表示される
+- [ ] ログイン後、同じブラウザで約12時間アクセスできる
+- [ ] ログアウトボタンで再度ログイン画面に戻る
+- [ ] `/api/admin-data` が未ログイン時に401を返す
+
+`ADMIN_PASSWORD` が未設定の場合は、ポートフォリオ用デモモードとして `/admin` と `/staff` は従来通り表示されます。本番案件ではこの簡易パスワードではなく、Supabase Auth、NextAuth、Basic認証、Vercel Middleware、Cloudflare Access、独自認証などを検討してください。
+
+本番では、管理者、店舗スタッフ、LINEユーザー本人で権限を分けます。特に `/staff` はスタッフ専用画面として扱い、一般ユーザー向けリッチメニューには出しません。
+
+## 追加チェック: LINE実機確認
+
+- [ ] LINE公式アカウント「診断予約デモ」を友だち追加できる
+- [ ] あいさつメッセージが保存され、友だち追加時に表示される
+- [ ] リッチメニューが表示される
+- [ ] リッチメニューの各ボタン文言が画像上で見える
+- [ ] 「診断する」をタップするとLIFF URLがLINE内ブラウザで開く
+- [ ] 画面上でLIFF接続状態が分かる
+- [ ] 診断フォームを最後まで進められる
+- [ ] 予約フォームを送信できる
+- [ ] 完了画面が表示される
+- [ ] 会員証画面が表示される
+- [ ] 管理画面で回答・予約・会員情報を確認できる
+
+リッチメニュー反映に時間がかかる場合は、以下を試してください。
+
+- トーク画面を開き直す
+- LINEアプリを再起動する
+- 数分待つ
+- 一度ブロック解除し直す
+
+LIFF ID、Webhook URL、Supabase Service Role Key、Slack Webhook URLなどの秘密値は、READMEやGitHubには記載しないでください。

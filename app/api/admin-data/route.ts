@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isAdminAuthEnabled, isAdminRequestAuthenticated } from "@/lib/adminAuth";
 import { mockCustomers, mockDiagnoses, mockReservations } from "@/lib/mockData";
 import {
   fromCustomerRow,
@@ -10,6 +11,16 @@ import {
 import type { AdminData } from "@/lib/types";
 
 export async function GET() {
+  if (isAdminAuthEnabled() && !(await isAdminRequestAuthenticated())) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "管理画面の認証が必要です。"
+      },
+      { status: 401 }
+    );
+  }
+
   const status = {
     supabaseConfigured: isSupabaseConfigured(),
     slackConfigured: Boolean(process.env.SLACK_WEBHOOK_URL),

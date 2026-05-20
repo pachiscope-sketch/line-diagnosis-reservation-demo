@@ -35,8 +35,7 @@ LIFF ID、Supabase、Slackが未設定でも、モックユーザー、ローカ
 | `SUPABASE_ANON_KEY` | 任意 | Supabase anon key |
 | `SUPABASE_SERVICE_ROLE_KEY` | 任意 | サーバー側保存用のService Role Key |
 | `SLACK_WEBHOOK_URL` | 任意 | Slack Incoming Webhook URL |
-| `ADMIN_USERNAME` | 任意 | 管理画面の簡易Basic認証ユーザー名 |
-| `ADMIN_PASSWORD` | 任意 | 管理画面の簡易Basic認証パスワード |
+| `ADMIN_PASSWORD` | 任意 | `/admin` と `/staff` の公開デモ用簡易パスワード |
 
 ## 本番向けの推奨
 
@@ -44,7 +43,7 @@ LIFF ID、Supabase、Slackが未設定でも、モックユーザー、ローカ
 - 実案件デモなら `NEXT_PUBLIC_USE_MOCK=false`
 - Supabaseへ保存するなら `SUPABASE_SERVICE_ROLE_KEY` をVercelの環境変数に設定
 - Slack通知を見せるなら `SLACK_WEBHOOK_URL` を設定
-- 管理画面を公開URLで見せるなら `ADMIN_PASSWORD` で簡易保護
+- 管理画面とスタッフ画面を公開URLで見せるなら `ADMIN_PASSWORD` で簡易保護
 - Service Role KeyとSlack Webhook URLはブラウザに出さない
 
 ## デプロイ後の確認

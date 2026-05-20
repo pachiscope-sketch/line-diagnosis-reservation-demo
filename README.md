@@ -315,7 +315,6 @@ SUPABASE_SERVICE_ROLE_KEY=
 SLACK_WEBHOOK_URL=
 GOOGLE_SHEETS_SPREADSHEET_ID=
 
-ADMIN_USERNAME=admin
 ADMIN_PASSWORD=
 ```
 
@@ -325,7 +324,7 @@ ADMIN_PASSWORD=
 - Supabase未設定: ローカルストレージとモックデータで動作
 - Slack未設定: console.logでモック通知
 - `ADMIN_PASSWORD` 未設定: 管理画面は営業デモ用に未保護で表示
-- `ADMIN_PASSWORD` 設定済み: `/admin` と `/api/admin-data` に簡易Basic認証
+- `ADMIN_PASSWORD` 設定済み: `/admin` と `/staff` に簡易パスワード認証。`/api/admin-data` は未認証時に401を返します。
 
 ## Renderデプロイ手順
 
@@ -388,3 +387,38 @@ docs/images/staff.png
 docs/images/admin.png
 docs/images/line-flow.png
 ```
+## LINE実機確認
+
+このデモは、LINE公式アカウントのリッチメニューからLIFFアプリとして開く想定で確認を進めています。秘密情報を含むLIFF IDはREADMEには記載しません。
+
+| 項目 | 内容 |
+| --- | --- |
+| LINE公式アカウント | 診断予約デモ |
+| Render公開URL | `https://line-diagnosis-reservation-demo.onrender.com` |
+| LIFF Endpoint URL | Render公開URL |
+| リッチメニュー | 診断する → LIFF URL |
+
+確認項目:
+
+- [ ] リッチメニュー表示
+- [ ] LIFF起動
+- [ ] LINE連携状態表示
+- [ ] 診断フォーム完了
+- [ ] 予約フォーム送信
+- [ ] 完了画面表示
+- [ ] 会員証表示
+
+現時点では、スマホLINEでの最終確認が必要な項目を含むため、上記は確認予定のチェックリストとして管理します。
+
+## 公開デモの管理系ページ保護
+
+`/admin` と `/staff` は公開URLで見せると弱点になりやすいため、`ADMIN_PASSWORD` を設定した環境では簡易パスワード認証を表示します。
+
+- `ADMIN_PASSWORD` 未設定: ポートフォリオ用デモモードとして従来通り表示
+- `ADMIN_PASSWORD` 設定済み: `/admin` と `/staff` でパスワード入力が必要
+- 認証後: HTTP-only Cookieで約12時間アクセス可能
+- ログアウト: 画面上部のログアウトボタンでCookieを削除
+
+これは営業デモ用の簡易保護です。本番案件ではSupabase Auth、NextAuth、Basic認証、Vercel Middleware、Cloudflare Accessなどを使い、管理者・店舗スタッフ・LINEユーザー本人の権限を分けてください。
+
+詳しくは [docs/admin-auth-plan.md](docs/admin-auth-plan.md) を参照してください。

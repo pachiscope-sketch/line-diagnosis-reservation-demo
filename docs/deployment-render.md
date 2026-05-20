@@ -105,3 +105,29 @@ Endpoint URL: https://line-diagnosis-reservation-demo.onrender.com/member-card
 ```
 
 `/staff` はスタッフ専用URLです。本番では認証を付け、一般ユーザー向けリッチメニューには出さないでください。
+## 追加: Render環境変数一覧
+
+公開デモでは、必要な値だけをRenderのEnvironment Variablesに設定します。秘密値はGitHub、README、スクリーンショット、チャットに載せないでください。
+
+| 環境変数 | 用途 | 未設定時の動作 |
+| --- | --- | --- |
+| `NEXT_PUBLIC_APP_URL` | 公開URL、QRコード、リンク一覧の基準URL | ローカルまたは既定URLで表示 |
+| `NEXT_PUBLIC_LIFF_ID` | LINE Developersで発行したLIFF ID | モックまたはLIFF未設定表示 |
+| `NEXT_PUBLIC_USE_MOCK` | `true`ならブラウザ確認用モックを優先 | LIFF IDがあればLIFF初期化を試行 |
+| `ADMIN_PASSWORD` | `/admin` と `/staff` の簡易保護 | デモモードとして従来通り表示 |
+| `SUPABASE_URL` | Supabase保存先URL | ローカル保存・モックデータで動作 |
+| `SUPABASE_SERVICE_ROLE_KEY` | API RouteからSupabaseへ保存するサーバー側キー | ローカル保存・モックデータで動作 |
+| `SLACK_WEBHOOK_URL` | 予約通知をSlackへ送るWebhook URL | `console.log` にモック通知 |
+
+`ADMIN_PASSWORD` を設定すると、`/admin` と `/staff` でパスワード入力画面が表示されます。値はRender側だけに保存し、READMEやGitHubには書かないでください。
+
+LIFF接続後の推奨例:
+
+```env
+NEXT_PUBLIC_APP_URL=https://line-diagnosis-reservation-demo.onrender.com
+NEXT_PUBLIC_LIFF_ID=xxxxxxxxxx-xxxxxxxx
+NEXT_PUBLIC_USE_MOCK=false
+ADMIN_PASSWORD=********
+```
+
+環境変数を変更した後は、RenderでManual DeployまたはRedeployを実行してください。
